@@ -5,7 +5,11 @@ module.exports = {
     './resources/views/**/*.blade.php',
   ],
   theme: {
-    extend: {},
+    extend: {
+      maxWidth:{
+        '8xl': '88rem',
+      }
+    },
   },
   variants: {},
   plugins: [
