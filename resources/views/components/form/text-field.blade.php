@@ -18,7 +18,7 @@
       id="{{ $name }}"
       name="{{ $name }}"
       type="{{ $type }}"
-      class="block form-input w-full placeholder-gray-400 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+      class="block w-full placeholder-gray-400 transition duration-150 ease-in-out form-input sm:text-sm sm:leading-5"
       value="{{ old($name, $value ?? '') }}"
       placeholder="{{ $placeholder ?? '' }}"
       autocomplete="{{ $autocomplete ?? '' }}"
