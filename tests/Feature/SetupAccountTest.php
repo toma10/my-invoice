@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use Tests\TestCase;
 use App\TokenGenerator;
-use Illuminate\Support\Facades\Hash;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
+use Tests\TestCase;
 
 class SetupAccountTest extends TestCase
 {

@@ -3,9 +3,9 @@
 namespace Tests\Unit\Http\Middleware;
 
 use App\User;
-use Tests\TestCase;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Route;
+use Tests\TestCase;
 
 class RedirectIfNotAdminTest extends TestCase
 {

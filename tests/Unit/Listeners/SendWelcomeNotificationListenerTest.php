@@ -2,12 +2,12 @@
 
 namespace Tests\Unit\Listeners;
 
-use App\User;
-use Tests\TestCase;
 use App\Events\UserInvited;
 use App\Notifications\WelcomeNotification;
-use Illuminate\Support\Facades\Notification;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Notification;
+use Tests\TestCase;
 
 class SendWelcomeNotificationListenerTest extends TestCase
 {

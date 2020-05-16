@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SetupAccountRequest;
 use App\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
-use App\Http\Requests\SetupAccountRequest;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class SetupAccountController
 {
@@ -15,7 +15,7 @@ class SetupAccountController
     {
         try {
             $user = User::findByEmail($request->email);
-        } catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $exception) {
             abort(Response::HTTP_BAD_REQUEST);
         }
 

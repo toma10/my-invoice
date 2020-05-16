@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
 use App\TokenGenerator;
+use Tests\TestCase;
 
 class TokenGeneratorTest extends TestCase
 {
@@ -24,7 +24,7 @@ class TokenGeneratorTest extends TestCase
 
         $token = $generator->generate();
 
-        $this->assertRegExp('/^[A-Z0-9]+$/', $token);
+        $this->assertMatchesRegularExpression('/^[A-Z0-9]+$/', $token);
     }
 
     /** @test */

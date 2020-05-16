@@ -12,9 +12,7 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    protected $dontReport = [
-        //
-    ];
+    protected $dontReport = [];
 
     /**
      * A list of the inputs that are never flashed for validation exceptions.
@@ -30,9 +28,10 @@ class Handler extends ExceptionHandler
      * Report or log an exception.
      *
      * @param  \Throwable  $exception
-     * @return void
      *
      * @throws \Exception
+     *
+     * @return void
      */
     public function report(Throwable $exception)
     {
@@ -44,9 +43,10 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Throwable  $exception
-     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \Throwable
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Throwable $exception)
     {

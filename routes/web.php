@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\InviteUserController;
 use App\Http\Controllers\SetupAccountController;
+use App\Http\Controllers\WelcomeController;
+use Illuminate\Support\Facades\Route;
 
 Route::view('login', 'auth.login')->name('login');
 // Route::post('login', '');

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\TokenGenerator;
 use App\Events\UserInvited;
-use Illuminate\Http\Response;
 use App\Http\Requests\InviteUserRequest;
+use App\TokenGenerator;
+use App\User;
+use Illuminate\Http\Response;
 
 class InviteUserController
 {

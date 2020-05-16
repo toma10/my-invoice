@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use Tests\TestCase;
 use App\Events\UserInvited;
+use App\User;
 use Facades\App\TokenGenerator;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
+use Tests\TestCase;
 
 class InviteUserTest extends TestCase
 {
