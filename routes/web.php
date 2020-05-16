@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\InviteUserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SetupAccountController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('login', [LoginController::class, 'show'])->middleware('guest')->name('login');
 Route::post('login', [LoginController::class, 'store'])->middleware('guest');
+Route::post('logout', LogoutController::class)->name('logout');
 
 Route::view('password/reset', 'auth.passwords.email')->name('password.request');
 // Route::post('password/email', '')->name('password.email');
@@ -31,7 +33,7 @@ Route::view('admin/departments/{department}/edit', 'admin.departments.edit')->na
 
 Route::view('admin/invoices', 'admin.invoices.index')->name('admin.invoices.index');
 
-Route::view('/', 'invoices.index')->name('invoices.index');
+Route::view('/', 'invoices.index')->middleware('auth')->name('invoices.index');
 Route::view('invoices/create', 'invoices.create')->name('invoices.create');
 Route::view('invoices/{invoice}', 'invoices.show')->name('invoices.show');
 Route::view('invoices/{invoice}/edit', 'invoices.edit')->name('invoices.edit');

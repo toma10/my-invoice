@@ -1,6 +1,6 @@
 @props(['action', 'method'])
 
-<form method="POST" action="{{ $action }}">
+<form method="POST" action="{{ $action }}" {{ $attributes }}>
   @csrf
   @isset($method)
     @method($method)

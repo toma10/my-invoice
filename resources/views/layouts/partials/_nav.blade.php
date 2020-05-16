@@ -37,7 +37,14 @@
             <div class="z-50 absolute right-0 w-48 mt-2 origin-top-right rounded-md shadow-lg" x-show="userMenuOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" @click.away="userMenuOpen = false">
               <div class="py-1 bg-white rounded-md shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                 <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100">My Profile</a>
-                <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100">Sign out</a>
+                <a
+                  href="{{ route('logout') }}"
+                  class="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                  @click.prevent="$refs.logoutForm.submit()"
+                >
+                  Sign out
+                </a>
+                <x-form.form :action="route('logout')" class="hidden" x-ref="logoutForm" />
               </div>
             </div>
           </div>
