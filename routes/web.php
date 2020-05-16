@@ -1,21 +1,22 @@
 <?php
 
 use App\Http\Controllers\InviteUserController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SetupAccountController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('login', 'auth.login')->name('login');
-// Route::post('login', '');
+Route::get('login', [LoginController::class, 'show'])->middleware('guest')->name('login');
+Route::post('login', [LoginController::class, 'store'])->middleware('guest');
 
 Route::view('password/reset', 'auth.passwords.email')->name('password.request');
 // Route::post('password/email', '')->name('password.email');
 Route::view('password/reset/{token}', 'auth.passwords.reset')->name('password.reset');
 // Route::post('password/reset', '')->name('password.update');
 
-Route::middleware('guest')->get('welcome/{token}', WelcomeController::class)->name('users.welcome');
-Route::middleware('guest')->post('welcome', SetupAccountController::class)->name('users.setupAccount');
-Route::middleware('admin')->post('users/invite', InviteUserController::class)->name('users.invite');
+Route::get('welcome/{token}', WelcomeController::class)->middleware('guest')->name('users.welcome');
+Route::post('welcome', SetupAccountController::class)->middleware('guest')->name('users.setupAccount');
+Route::post('users/invite', InviteUserController::class)->middleware('admin')->name('users.invite');
 
 Route::view('profile', 'profile.show')->name('profile.show');
 Route::view('profile/edit', 'profile.edit')->name('profile.edit');
