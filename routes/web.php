@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\InviteUserController;
+use App\Http\Controllers\SetupAccountController;
 
 Route::view('login', 'auth.login')->name('login');
 // Route::post('login', '');
@@ -9,6 +12,10 @@ Route::view('password/reset', 'auth.passwords.email')->name('password.request');
 // Route::post('password/email', '')->name('password.email');
 Route::view('password/reset/{token}', 'auth.passwords.reset')->name('password.reset');
 // Route::post('password/reset', '')->name('password.update');
+
+Route::middleware('guest')->get('welcome/{token}', WelcomeController::class)->name('users.welcome');
+Route::middleware('guest')->post('welcome', SetupAccountController::class)->name('users.setupAccount');
+Route::middleware('admin')->post('users/invite', InviteUserController::class)->name('users.invite');
 
 Route::view('profile', 'profile.show')->name('profile.show');
 Route::view('profile/edit', 'profile.edit')->name('profile.edit');
