@@ -22,16 +22,16 @@ class InvoicesController
     {
         $data = $request->validated();
         $pdf = $data['pdf_file'];
-        Arr::forget($data, 'pdf_file');
+        $data = Arr::except($data, 'pdf_file');
 
-        $invoice = Invoice::make(
-            array_merge($data, [
-                'pdf_file_filename' => $pdf->getClientOriginalName(),
-                'pdf_file_path' => $pdf->store('invoices'),
-            ])
+        $data += [
+            'pdf_file_filename' => $pdf->getClientOriginalName(),
+            'pdf_file_path' => $pdf->store('invoices'),
+        ];
+
+        $request->user()->addInvoice(
+            $invoice = Invoice::make($data)
         );
-
-        $request->user()->addInvoice($invoice);
 
         return redirect()->route('invoices.show', $invoice);
     }
