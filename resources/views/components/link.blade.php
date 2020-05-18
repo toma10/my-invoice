@@ -13,7 +13,11 @@
 
   $classes = [
     'link' => 'text-sm font-medium leading-5 text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-500 focus:outline-none focus:underline',
-    'button' => "inline-flex justify-center {{ $fullWidth ? 'w-full' : '' }} px-4 py-2 text-sm font-medium transition duration-150 ease-in-out rounded-md border {{ $variants[$variant] }} focus:outline-none",
+    'button' => sprintf(
+      '%s inline-flex justify-center px-4 py-2 text-sm font-medium transition duration-150 ease-in-out rounded-md border focus:outline-none %s',
+      $fullWidth ? 'w-full' : '',
+      $variants[$variant]
+    ),
   ];
 @endphp
 
