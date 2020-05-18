@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Department;
 use App\Http\Requests\InvoiceRequest;
 use App\Invoice;
+use App\ViewModels\InvoiceViewModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
@@ -13,9 +13,9 @@ class InvoicesController
 {
     public function create(): View
     {
-        $departments = Department::pluck('name', 'id')->toArray();
+        $viewModel = new InvoiceViewModel();
 
-        return view('invoices.create', compact('departments'));
+        return view('invoices.create', $viewModel);
     }
 
     public function store(InvoiceRequest $request): RedirectResponse
