@@ -70,7 +70,14 @@
       </div>
       <div class="px-2 mt-3 sm:px-3">
         <a href="{{ route('profile.show') }}" class="block px-3 py-2 text-base font-medium text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">My Profile</a>
-        <a href="#" class="block px-3 py-2 mt-1 text-base font-medium text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Sign out</a>
+        <a
+          href="{{ route('logout') }}"
+          class="block px-3 py-2 mt-1 text-base font-medium text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+          @click.prevent="$refs.logoutForm.submit()"
+        >
+          Sign out
+        </a>
+        <x-form :action="route('logout')" class="hidden" x-ref="logoutForm" />
       </div>
     </div>
   </div>
