@@ -17,6 +17,7 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->string('company_registration_number');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('department_id')->constrained()->cascadeOnDelete();
             $table->date('period');
             $table->date('invoice_date');
@@ -26,11 +27,11 @@ class CreateInvoicesTable extends Migration
             $table->enum('currency', Currency::keys());
             $table->integer('hours');
             $table->string('variable_symbol');
-            $table->string('constant_symbol');
+            $table->string('constant_symbol')->nullable();
             $table->string('pdf_file_filename');
             $table->string('pdf_file_path');
             $table->text('description');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

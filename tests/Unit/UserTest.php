@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Invoice;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -44,5 +45,38 @@ class UserTest extends TestCase
             $this->assertEquals('token', $user->token);
             $this->assertFalse($user->isAdmin());
         });
+    }
+
+    /** @test */
+    public function user_can_have_multiple_invoices()
+    {
+        $user = factory(User::class)->create();
+        $invoiceA = factory(Invoice::class)->create(['user_id' => $user]);
+        $invoiceB = factory(Invoice::class)->create(['user_id' => $user]);
+
+        $user->invoices->assertContains($invoiceA, $invoiceB);
+    }
+
+    /** @test */
+    public function user_can_add_invoice()
+    {
+        $user = factory(User::class)->create();
+        $invoice = factory(Invoice::class)->make(['user_id' => null]);
+
+        $user->addInvoice($invoice);
+
+        $this->assertTrue($invoice->user->is($user));
+    }
+
+    /** @test */
+    public function user_can_determine_if_owner_of_the_invoice()
+    {
+        $user = factory(User::class)->create();
+        $otherUser = factory(User::class)->create();
+        $invoiceA = factory(Invoice::class)->create(['user_id' => $otherUser]);
+        $invoiceB = factory(Invoice::class)->create(['user_id' => $user]);
+
+        $this->assertFalse($user->isOwnerOf($invoiceA));
+        $this->assertTrue($user->isOwnerOf($invoiceB));
     }
 }

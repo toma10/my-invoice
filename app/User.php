@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -31,5 +32,20 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->is_admin;
+    }
+
+    public function addInvoice(Invoice $invoice): void
+    {
+        $this->invoices()->save($invoice);
+    }
+
+    public function isOwnerOf(Invoice $invoice): bool
+    {
+        return $this->invoices->contains($invoice);
+    }
+
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class);
     }
 }

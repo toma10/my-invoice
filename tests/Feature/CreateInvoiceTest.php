@@ -65,11 +65,9 @@ class CreateInvoiceTest extends TestCase
             'note' => 'Refactoring + design',
         ]);
 
-        $this->assertCount(1, Invoice::all());
-        $invoice = Invoice::first();
-        $response->assertRedirect("invoices/{$invoice->id}");
         $this->assertDatabaseHas('invoices', [
             'company_registration_number' => '01234567',
+            'user_id' => $user->id,
             'department_id' => $department->id,
             'period' => '2020-05-01 00:00:00',
             'invoice_date' => '2020-04-30 00:00:00',
@@ -84,7 +82,10 @@ class CreateInvoiceTest extends TestCase
             'pdf_file_filename' => 'invoice-2020-05.pdf',
             'note' => 'Refactoring + design',
         ]);
-        Storage::assertExists($invoice->pdf_file_path);
+        tap(Invoice::first(), function (Invoice $invoice) use ($response) {
+            $response->assertRedirect("invoices/{$invoice->id}");
+            Storage::assertExists($invoice->pdf_file_path);
+        });
     }
 
     public function requiredFieldsProvider(): Generator

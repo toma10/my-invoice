@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DownloadInvoiceController;
 use App\Http\Controllers\InviteUserController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\LoginController;
@@ -38,6 +39,9 @@ Route::view('/', 'invoices.index')->middleware('auth')->name('invoices.index');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('invoices/create', [InvoicesController::class, 'create'])->name('invoices.create');
     Route::post('invoices', [InvoicesController::class, 'store'])->name('invoices.store');
+    Route::get('invoices/{invoice}', [InvoicesController::class, 'show'])->name('invoices.show');
+
+    Route::post('invoices/{invoice}/download', DownloadInvoiceController::class)->name('invoices.download');
 });
-Route::view('invoices/{invoice}', 'invoices.show')->name('invoices.show');
+
 Route::view('invoices/{invoice}/edit', 'invoices.edit')->name('invoices.edit');

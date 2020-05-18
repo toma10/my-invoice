@@ -5,7 +5,7 @@
   <div class="flex justify-between items-center border-b border-gray-200 pb-6">
     <div class="flex items-center space-x-3">
       <h2 class="text-3xl font-bold leading-tight text-gray-900">
-        Invoice 20200005
+        Invoice {{ $invoice->company_registration_number }}
       </h2>
       <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-blue-100 text-blue-800">
         Created
@@ -36,7 +36,7 @@
             Department
           </dt>
           <dd class="mt-1 text-sm leading-5 text-gray-900">
-            Department A
+            {{ $invoice->department->name }}
           </dd>
         </div>
         <div class="sm:col-span-1">
@@ -44,7 +44,7 @@
             Company Registration Number
           </dt>
           <dd class="mt-1 text-sm leading-5 text-gray-900">
-            XXXXXXXXX
+            {{ $invoice->company_registration_number }}
           </dd>
         </div>
         <div class="sm:col-span-1">
@@ -52,7 +52,7 @@
             Period
           </dt>
           <dd class="mt-1 text-sm leading-5 text-gray-900">
-            Apr 2020
+            {{ $invoice->period->format('M, Y') }}
           </dd>
         </div>
         <div class="sm:col-span-1">
@@ -60,7 +60,7 @@
             Invoice Date
           </dt>
           <dd class="mt-1 text-sm leading-5 text-gray-900">
-            2020/04/30
+            {{ $invoice->invoice_date->toFormattedDateString() }}
           </dd>
         </div>
         <div class="sm:col-span-1">
@@ -68,7 +68,7 @@
             Date of Taxable Supply
           </dt>
           <dd class="mt-1 text-sm leading-5 text-gray-900">
-            2020/04/30
+            {{ $invoice->date_of_taxable_supply->toFormattedDateString() }}
           </dd>
         </div>
         <div class="sm:col-span-1">
@@ -76,7 +76,7 @@
             Due Date
           </dt>
           <dd class="mt-1 text-sm leading-5 text-gray-900">
-            2020/05/15
+            {{ $invoice->due_date->toFormattedDateString() }}
           </dd>
         </div>
         <div class="sm:col-span-1">
@@ -84,7 +84,7 @@
             Variable Symbol
           </dt>
           <dd class="mt-1 text-sm leading-5 text-gray-900">
-            20200005
+            {{ $invoice->variable_symbol }}
           </dd>
         </div>
         <div class="sm:col-span-1">
@@ -92,7 +92,7 @@
             Constant Symbol
           </dt>
           <dd class="mt-1 text-sm leading-5 text-gray-900">
-            -
+            {{ $invoice->constant_symbol ?: '-' }}
           </dd>
         </div>
         <div class="sm:col-span-1">
@@ -100,7 +100,7 @@
             Hours
           </dt>
           <dd class="mt-1 text-sm leading-5 text-gray-900">
-            160
+            {{ $invoice->hours }}
           </dd>
         </div>
         <div class="sm:col-span-1"></div>
@@ -109,7 +109,7 @@
             Description
           </dt>
           <dd class="mt-1 text-sm leading-5 text-gray-900">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum iste, similique hic vero incidunt minus illo cum voluptates ducimus quidem.
+            {{ $invoice->description }}
           </dd>
         </div>
         <div class="sm:col-span-1"></div>
@@ -118,23 +118,7 @@
             Price
           </dt>
           <dd class="mt-1 text-sm leading-5 text-gray-900">
-            35000 KČ
-          </dd>
-        </div>
-        <div class="sm:col-span-1">
-          <dt class="text-sm leading-5 font-medium text-gray-500">
-            VAT
-          </dt>
-          <dd class="mt-1 text-sm leading-5 text-gray-900">
-            160
-          </dd>
-        </div>
-        <div class="sm:col-span-1">
-          <dt class="text-sm leading-5 font-medium text-gray-500">
-            Total price with VAT
-          </dt>
-          <dd class="mt-1 text-sm leading-5 text-gray-900">
-            35000 KČ
+            {{ number_format($invoice->price) }} {{ $invoice->currency }}
           </dd>
         </div>
         <div class="sm:col-span-1"></div>
@@ -150,13 +134,13 @@
                     <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd"/>
                   </svg>
                   <span class="ml-2 flex-1 w-0 truncate">
-                    20200005.pdf
+                    {{ $invoice->pdf_file_filename }}
                   </span>
                 </div>
                 <div class="ml-4 flex-shrink-0">
-                  <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out">
-                    Download
-                  </a>
+                  <x-form :action="route('invoices.download', $invoice)">
+                    <x-button as-link>Download</x-button>
+                  </x-form>
                 </div>
               </li>
             </ul>
@@ -212,7 +196,7 @@
             Note
           </dt>
           <dd class="mt-1 text-sm leading-5 text-gray-900">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, officia repellendus dolore impedit perspiciatis magnam aliquam consectetur commodi nemo rem nisi magni atque assumenda, itaque non temporibus. Magnam, quaerat, adipisci.
+            {{ $invoice->note ?: '-' }}
           </dd>
         </div>
       </dl>
