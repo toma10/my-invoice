@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Form;
+namespace App\View\Components;
 
 use App\Currency;
 use Illuminate\View\Component;
@@ -20,7 +20,7 @@ class PriceField extends Component
 
     public function render(): View
     {
-        return view('components.form.price-field');
+        return view('components.price-field');
     }
 
     public function currencies(): array

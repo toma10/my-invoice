@@ -9,7 +9,7 @@
   </div>
 </header>
 <div class="mt-12">
-  <x-form.form :action="route('invoices.store')" enctype="multipart/form-data">
+  <x-form :action="route('invoices.store')" enctype="multipart/form-data">
     <div>
       <div class="md:grid md:grid-cols-3 md:gap-6">
         <div class="md:col-span-1">
@@ -25,7 +25,7 @@
             <div class="px-4 py-5 bg-white sm:p-6">
               <div class="grid grid-cols-6 gap-6">
                 <div class="col-span-6 lg:col-span-3">
-                  <x-form.select-field
+                  <x-select-field
                     name="department_id"
                     label="Department"
                     :options="$departments"
@@ -37,7 +37,7 @@
                 <div class="hidden lg:block lg:col-span-3"></div>
 
                 <div class="col-span-6 lg:col-span-3">
-                  <x-form.text-field
+                  <x-text-field
                     name="company_registration_number"
                     label="Company Registration Number"
                     required
@@ -47,7 +47,7 @@
                 <div class="hidden lg:block lg:col-span-3"></div>
 
                 <div class="col-span-6 lg:col-span-3">
-                  <x-form.text-field
+                  <x-text-field
                     name="period"
                     type="month"
                     label="Period"
@@ -55,11 +55,11 @@
                     <x-slot name="icon">
                       <x-heroicon-s-calendar />
                     </x-slot>
-                  </x-form.text-field>
+                  </x-text-field>
                 </div>
 
                 <div class="col-span-6 lg:col-span-3">
-                  <x-form.text-field
+                  <x-text-field
                     name="invoice_date"
                     type="date"
                     label="Invoice Date"
@@ -68,11 +68,11 @@
                     <x-slot name="icon">
                       <x-heroicon-s-calendar />
                     </x-slot>
-                  </x-form.text-field>
+                  </x-text-field>
                 </div>
 
                 <div class="col-span-6 lg:col-span-3">
-                  <x-form.text-field
+                  <x-text-field
                     name="date_of_taxable_supply"
                     type="date"
                     label="Date of Taxable Supply"
@@ -81,44 +81,46 @@
                     <x-slot name="icon">
                       <x-heroicon-s-calendar />
                     </x-slot>
-                  </x-form.text-field>
+                  </x-text-field>
                 </div>
 
                 <div class="col-span-6 lg:col-span-3">
-                  <x-form.text-field
+                  <x-text-field
                     name="due_date"
                     type="date"
                     label="Due Date"
                     required
                   >
                     ho
-                  </x-form.text-field>
+                  </x-text-field>
                 </div>
 
                 <div class="col-span-6 lg:col-span-3">
-                  <x-form.text-field
+                  <x-text-field
                     name="variable_symbol"
                     label="Variable Symbol"
                     required />
                 </div>
 
                 <div class="col-span-6 lg:col-span-3">
-                  <x-form.text-field
+                  <x-text-field
                     name="constant_symbol"
                     label="Constant Symbol"
                     />
                 </div>
 
                 <div class="col-span-4 md:col-span-4 lg:col-span-3">
-                  <x-form.price-field name="price"
-                  label="Price"
-                  required />
+                  <x-price-field
+                    name="price"
+                    label="Price"
+                    required
+                  />
                 </div>
 
                 <div class="hidden lg:block lg:col-span-3"></div>
 
                 <div class="col-span-2 xl:col-span-1">
-                  <x-form.text-field
+                  <x-text-field
                     name="hours"
                     type="number"
                     label="Hours"
@@ -128,13 +130,13 @@
                     <x-slot name="icon">
                       <x-heroicon-s-clock />
                     </x-slot>
-                  </x-form.text-field>
+                  </x-text-field>
                 </div>
 
                 <div class="hidden lg:block lg:col-span-4 xl:col-span-5"></div>
 
                <div class="col-span-6">
-                  <x-form.text-field
+                  <x-text-field
                     name="description"
                     label="Description"
                     required
@@ -142,7 +144,7 @@
                </div>
 
                 <div class="col-span-6 lg:col-span-3">
-                  <x-form.text-field
+                  <x-text-field
                     name="pdf_file"
                     type="file"
                     label="PDF File"
@@ -206,7 +208,7 @@
             <div class="px-4 py-5 bg-white sm:p-6">
               <div class="grid grid-cols-6 gap-6">
                 <div class="col-span-6">
-                  <x-form.textarea-field name="note" label="Note" />
+                  <x-textarea-field name="note" label="Note" />
                 </div>
               </div>
             </div>
@@ -220,6 +222,6 @@
         <x-button>Save</x-button>
       </div>
     </div>
-  </x-form.form>
+  </x-form>
 </div>
 @endsection

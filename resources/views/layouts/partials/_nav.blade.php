@@ -44,7 +44,7 @@
                 >
                   Sign out
                 </a>
-                <x-form.form :action="route('logout')" class="hidden" x-ref="logoutForm" />
+                <x-form :action="route('logout')" class="hidden" x-ref="logoutForm" />
               </div>
             </div>
           </div>
