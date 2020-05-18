@@ -31,7 +31,7 @@
           <div class="relative ml-3" x-data="{ userMenuOpen: false }">
             <div>
               <button class="flex text-sm transition duration-150 ease-in-out border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300" id="user-menu" aria-label="User menu" aria-haspopup="true" @click="userMenuOpen = true" x-on:keydown.escape="userMenuOpen = false">
-                <img class="w-8 h-8 rounded-full" src="https://www.gravatar.com/avatar/7abeb9188ad670ecfac0ecdbdb8199e4?d=mp&s=80" alt="Avatar" />
+                <img class="w-8 h-8 rounded-full" src="{{ auth()->user()->avatarUrl() }}" alt="Avatar" />
               </button>
             </div>
             <div class="z-50 absolute right-0 w-48 mt-2 origin-top-right rounded-md shadow-lg" x-show="userMenuOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" @click.away="userMenuOpen = false">
@@ -61,11 +61,11 @@
     <div class="pt-4 pb-3 border-t border-gray-700">
       <div class="flex items-center px-5 sm:px-6">
         <div class="flex-shrink-0">
-          <img class="w-10 h-10 rounded-full" src="https://www.gravatar.com/avatar/7abeb9188ad670ecfac0ecdbdb8199e4?d=mp&s=80" alt="Avatar" />
+          <img class="w-10 h-10 rounded-full" src="{{ auth()->user()->avatarUrl() }}" alt="Avatar" />
         </div>
         <div class="ml-3">
-          <div class="text-base font-medium leading-6 text-white">Tomáš Máčala</div>
-          <div class="text-sm font-medium leading-5 text-gray-400">tomas.macala@seznam.cz</div>
+          <div class="text-base font-medium leading-6 text-white">{{ auth()->user()->name }}</div>
+          <div class="text-sm font-medium leading-5 text-gray-400">{{ auth()->user()->email }}</div>
         </div>
       </div>
       <div class="px-2 mt-3 sm:px-3">

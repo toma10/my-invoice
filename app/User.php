@@ -29,6 +29,15 @@ class User extends Authenticatable
         return User::create(compact('email', 'token'));
     }
 
+    public function avatarUrl(int $size = 80): string
+    {
+        return sprintf(
+            'https://www.gravatar.com/avatar/%s?d=mp&s=%d',
+            md5(strtolower(trim($this->email))),
+            $size
+        );
+    }
+
     public function isAdmin(): bool
     {
         return $this->is_admin;

@@ -48,6 +48,15 @@ class UserTest extends TestCase
     }
 
     /** @test */
+    public function getting_avatar_url()
+    {
+        $user = factory(User::class)->create(['email' => 'johndoe@example.com']);
+
+        $this->assertEquals('https://www.gravatar.com/avatar/fd876f8cd6a58277fc664d47ea10ad19?d=mp&s=80', $user->avatarUrl());
+        $this->assertEquals('https://www.gravatar.com/avatar/fd876f8cd6a58277fc664d47ea10ad19?d=mp&s=150', $user->avatarUrl(150));
+    }
+
+    /** @test */
     public function user_can_have_multiple_invoices()
     {
         $user = factory(User::class)->create();

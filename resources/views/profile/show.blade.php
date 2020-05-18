@@ -19,14 +19,14 @@
     <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
       <div class="flex items-center">
         <div class="flex-shrink-0">
-          <img class="h-12 w-12 rounded-full" src="https://www.gravatar.com/avatar/7abeb9188ad670ecfac0ecdbdb8199e4?d=mp&s=80" alt="Avatar" />
+          <img class="h-12 w-12 rounded-full" src="{{ $user->avatarUrl() }}" alt="Avatar" />
         </div>
         <div class="ml-4">
           <h3 class="text-lg leading-6 font-medium text-gray-900">
-            Tomáš Máčala
+            {{ $user->name }}
           </h3>
           <p class="text-sm leading-5 text-gray-500">
-            tomas.macala@seznam.cz
+            {{ $user->email }}
           </p>
         </div>
       </div>
@@ -45,7 +45,7 @@
             Role
           </dt>
           <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-            Administrator
+            {{ $user->isAdmin() ? 'Administrator' : 'User' }}
           </dd>
         </div>
         <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -53,7 +53,7 @@
             Created
           </dt>
           <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-            May 20, 2020
+            {{ $user->created_at->toFormattedDateString() }}
           </dd>
         </div>
       </dl>

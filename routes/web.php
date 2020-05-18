@@ -5,6 +5,7 @@ use App\Http\Controllers\InviteUserController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SetupAccountController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +23,9 @@ Route::get('welcome/{token}', WelcomeController::class)->middleware('guest')->na
 Route::post('welcome', SetupAccountController::class)->middleware('guest')->name('users.setupAccount');
 Route::post('users/invite', InviteUserController::class)->middleware('admin')->name('users.invite');
 
-Route::view('profile', 'profile.show')->name('profile.show');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
+});
 Route::view('profile/edit', 'profile.edit')->name('profile.edit');
 // Route::put('profile', '')->name('profile.update');
 
@@ -35,8 +38,8 @@ Route::view('admin/departments/{department}/edit', 'admin.departments.edit')->na
 
 Route::view('admin/invoices', 'admin.invoices.index')->name('admin.invoices.index');
 
-Route::view('/', 'invoices.index')->middleware('auth')->name('invoices.index');
 Route::group(['middleware' => 'auth'], function () {
+    Route::view('/', 'invoices.index')->middleware('auth')->name('invoices.index');
     Route::get('invoices/create', [InvoicesController::class, 'create'])->name('invoices.create');
     Route::post('invoices', [InvoicesController::class, 'store'])->name('invoices.store');
     Route::get('invoices/{invoice}', [InvoicesController::class, 'show'])->name('invoices.show');
