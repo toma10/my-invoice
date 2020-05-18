@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InviteUserController;
+use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SetupAccountController;
@@ -34,6 +35,9 @@ Route::view('admin/departments/{department}/edit', 'admin.departments.edit')->na
 Route::view('admin/invoices', 'admin.invoices.index')->name('admin.invoices.index');
 
 Route::view('/', 'invoices.index')->middleware('auth')->name('invoices.index');
-Route::view('invoices/create', 'invoices.create')->name('invoices.create');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('invoices/create', [InvoicesController::class, 'create'])->name('invoices.create');
+    Route::post('invoices', [InvoicesController::class, 'store'])->name('invoices.store');
+});
 Route::view('invoices/{invoice}', 'invoices.show')->name('invoices.show');
 Route::view('invoices/{invoice}/edit', 'invoices.edit')->name('invoices.edit');

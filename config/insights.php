@@ -11,6 +11,7 @@ use NunoMaduro\PhpInsights\Domain\Metrics\Architecture\Classes;
 use ObjectCalisthenics\Sniffs\Classes\ForbiddenPublicPropertySniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UselessOverridingMethodSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
+use SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff;
 use SlevomatCodingStandard\Sniffs\Commenting\UselessFunctionDocCommentSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
 use SlevomatCodingStandard\Sniffs\Namespaces\AlphabeticallySortedUsesSniff;
@@ -105,6 +106,13 @@ return [
         UnusedParameterSniff::class => [
             'exclude' => [
                 'app/Console/Kernel.php',
+                'app/Casts/CurrencyCast.php',
+                'app/Rules/CurrencyRule.php',
+            ],
+        ],
+        UnusedPrivateElementsSniff::class => [
+            'exclude' => [
+                'app/Currency.php',
             ],
         ],
         UselessOverridingMethodSniff::class => [

@@ -48,6 +48,12 @@ return [
             'root' => storage_path('app'),
         ],
 
+        'invoices' => [
+            'driver' => 'local',
+            'root' => storage_path('app/invoices'),
+            'url' => env('APP_URL').'/invoices',
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

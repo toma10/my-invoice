@@ -12,7 +12,7 @@
         <x-form.checkbox name="remember" label="Remember me" />
         <x-link :href="route('password.request')">Forgot your password?</x-link>
       </div>
-      <x-form.button>Sign In</x-form.button>
+      <x-button full-width>Sign In</x-button>
     </div>
   </x-form.form>
 </x-auth.panel>
