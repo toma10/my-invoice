@@ -6,8 +6,6 @@ use App\Department;
 use App\Http\Requests\InvoiceRequest;
 use App\Invoice;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
 
@@ -38,10 +36,8 @@ class InvoicesController
         return redirect()->route('invoices.show', $invoice);
     }
 
-    public function show(Request $request, Invoice $invoice): View
+    public function show(Invoice $invoice): View
     {
-        abort_if(! $request->user()->isOwnerOf($invoice), Response::HTTP_NOT_FOUND);
-
         return view('invoices.show', compact('invoice'));
     }
 }

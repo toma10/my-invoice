@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
@@ -11,6 +12,24 @@ class RouteServiceProvider extends ServiceProvider
      * The path to the "home" route for your application.
      */
     public const HOME = '/';
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        parent::boot();
+
+        Route::bind('invoice', function ($id) {
+            $user = auth()->user();
+
+            abort_if(! $user, Response::HTTP_NOT_FOUND);
+
+            return $user->invoices()->where('id', $id)->firstOrFail();
+        });
+    }
 
     /**
      * Define the routes for the application.
