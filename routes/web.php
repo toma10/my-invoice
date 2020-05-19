@@ -39,7 +39,7 @@ Route::view('admin/departments/{department}/edit', 'admin.departments.edit')->na
 Route::view('admin/invoices', 'admin.invoices.index')->name('admin.invoices.index');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::view('/', 'invoices.index')->middleware('auth')->name('invoices.index');
+    Route::get('/', [InvoicesController::class, 'index'])->name('invoices.index');
     Route::get('invoices/create', [InvoicesController::class, 'create'])->name('invoices.create');
     Route::post('invoices', [InvoicesController::class, 'store'])->name('invoices.store');
     Route::get('invoices/{invoice}', [InvoicesController::class, 'show'])->name('invoices.show');

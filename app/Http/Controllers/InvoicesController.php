@@ -6,12 +6,20 @@ use App\Http\Requests\InvoiceRequest;
 use App\Invoice;
 use App\ViewModels\InvoiceViewModel;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class InvoicesController
 {
+    public function index(Request $request): View
+    {
+        $invoices = $request->user()->invoices;
+
+        return view('invoices.index', compact('invoices'));
+    }
+
     public function create(): View
     {
         $viewModel = new InvoiceViewModel();
