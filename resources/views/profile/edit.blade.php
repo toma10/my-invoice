@@ -20,28 +20,24 @@
         </div>
       </div>
       <div class="mt-5 md:mt-0 md:col-span-2">
-        <form action="#" method="POST">
+        <x-form :action="route('profile.update')" method="PUT">
           <div class="border border-gray-100 shadow-md overflow-hidden sm:rounded-md">
             <div class="px-4 py-5 bg-white sm:p-6">
               <div class="grid grid-cols-6 gap-6">
                 <div class="col-span-6 sm:col-span-3">
-                  <label for="name" class="block text-sm font-medium leading-5 text-gray-700">Name</label>
-                  <input id="name" name="name" class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required autofocus />
+                  <x-text-field name="name" label="Name" :value="$user->name" required autofocus />
                 </div>
 
                 <div class="col-span-6 sm:col-span-4">
-                  <label for="email" class="block text-sm font-medium leading-5 text-gray-700">Email</label>
-                  <input id="email" name="email" class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required />
+                  <x-text-field name="email" type="email" label="Email" :value="$user->email" required />
                 </div>
               </div>
             </div>
             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-              <button class="py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out">
-                Save
-              </button>
+              <x-button>Save</x-button>
             </div>
           </div>
-        </form>
+        </x-form>
       </div>
     </div>
   </div>
@@ -95,9 +91,7 @@
               </fieldset>
             </div>
             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-              <button class="py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue focus:bg-indigo-500 active:bg-indigo-600 transition duration-150 ease-in-out">
-                Save
-              </button>
+              <x-button>Save</x-button>
             </div>
           </div>
         </form>

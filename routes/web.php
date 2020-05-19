@@ -25,9 +25,9 @@ Route::post('users/invite', InviteUserController::class)->middleware('admin')->n
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 });
-Route::view('profile/edit', 'profile.edit')->name('profile.edit');
-// Route::put('profile', '')->name('profile.update');
 
 Route::view('admin', 'admin.dashboard')->name('admin.dashboard');
 
