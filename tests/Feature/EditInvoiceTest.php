@@ -23,15 +23,20 @@ class EditInvoiceTest extends TestCase
     }
 
     /** @test */
+    public function guests_cannot_view_edit_invoice_page()
+    {
+        $invoice = factory(Invoice::class)->create();
+
+        $this->get("invoices/{$invoice->id}/edit")->assertRedirect('login');
+    }
+
+    /** @test */
     public function user_can_view_edit_invoice_page_only_for_his_invoices()
     {
         $user = factory(User::class)->create();
         $invoice = factory(Invoice::class)->create(['user_id' => $user]);
         $otherUser = factory(User::class)->create();
         $otherUserInvoice = factory(Invoice::class)->create(['user_id' => $otherUser]);
-
-        $this->get("invoices/{$invoice->id}/edit")
-            ->assertRedirect('login');
 
         $this->actingAs($user)
             ->get("invoices/{$invoice->id}/edit")
