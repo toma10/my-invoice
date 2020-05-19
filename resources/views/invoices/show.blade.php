@@ -118,7 +118,7 @@
             Price
           </dt>
           <dd class="mt-1 text-sm leading-5 text-gray-900">
-            {{ number_format($invoice->price) }} {{ $invoice->currency }}
+            {{ number_format($invoice->price, 2) }} {{ $invoice->currency }}
           </dd>
         </div>
         <div class="sm:col-span-1"></div>
