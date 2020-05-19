@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Rules\CurrencyRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class InvoiceRequest extends FormRequest
 {
@@ -21,9 +22,14 @@ class InvoiceRequest extends FormRequest
             'hours' => ['required', 'integer', 'min:0'],
             'variable_symbol' => ['required'],
             'constant_symbol' => ['nullable'],
-            'pdf_file' => ['required', 'file', 'mimes:pdf'],
+            'pdf_file' => [Rule::requiredIf($this->isCreateAction()), 'file', 'mimes:pdf'],
             'description' => ['required'],
             'note' => ['nullable'],
         ];
+    }
+
+    protected function isCreateAction(): bool
+    {
+        return $this->route('invoice') === null;
     }
 }

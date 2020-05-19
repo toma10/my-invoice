@@ -7,6 +7,7 @@ use App\Invoice;
 use App\ViewModels\InvoiceViewModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class InvoicesController
@@ -39,5 +40,33 @@ class InvoicesController
     public function show(Invoice $invoice): View
     {
         return view('invoices.show', compact('invoice'));
+    }
+
+    public function edit(Invoice $invoice): View
+    {
+        $viewModel = new InvoiceViewModel($invoice);
+
+        return view('invoices.edit', $viewModel);
+    }
+
+    public function update(InvoiceRequest $request, Invoice $invoice): RedirectResponse
+    {
+        $data = $request->validated();
+
+        if (isset($data['pdf_file'])) {
+            $pdf = $data['pdf_file'];
+
+            $data += [
+                'pdf_file_filename' => $pdf->getClientOriginalName(),
+                'pdf_file_path' => $pdf->store('invoices'),
+            ];
+
+            Storage::delete($invoice->pdf_file_path);
+        }
+
+        $data = Arr::except($data, 'pdf_file');
+        $invoice->update($data);
+
+        return redirect()->route('invoices.show', $invoice);
     }
 }

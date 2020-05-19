@@ -43,8 +43,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('invoices/create', [InvoicesController::class, 'create'])->name('invoices.create');
     Route::post('invoices', [InvoicesController::class, 'store'])->name('invoices.store');
     Route::get('invoices/{invoice}', [InvoicesController::class, 'show'])->name('invoices.show');
+    Route::get('invoices/{invoice}/edit', [InvoicesController::class, 'edit'])->name('invoices.edit');
+    Route::put('invoices/{invoice}', [InvoicesController::class, 'update'])->name('invoices.update');
 
     Route::post('invoices/{invoice}/download', DownloadInvoiceController::class)->name('invoices.download');
 });
-
-Route::view('invoices/{invoice}/edit', 'invoices.edit')->name('invoices.edit');
