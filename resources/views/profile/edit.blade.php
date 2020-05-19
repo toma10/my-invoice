@@ -48,6 +48,73 @@
     </div>
   </div>
 
+  <div class="mt-12">
+    <div>
+      <div class="md:grid md:grid-cols-3 md:gap-6">
+        <div class="md:col-span-1">
+          <div class="px-4 sm:px-0">
+            <h3 class="text-lg font-medium leading-6 text-gray-900">Change password</h3>
+            <p class="mt-1 text-sm leading-5 text-gray-600">
+              Change your current password.
+            </p>
+          </div>
+        </div>
+        <div class="mt-5 md:mt-0 md:col-span-2">
+          <x-form :action="route('password.change')">
+            <div class="border border-gray-100 shadow-md overflow-hidden sm:rounded-md">
+              <div class="px-4 py-5 bg-white sm:p-6">
+                <div class="grid grid-cols-6 gap-6">
+                  <div class="col-span-6 sm:col-span-3">
+                    <x-text-field
+                      name="current_password"
+                      type="password"
+                      label="Current Password"
+                      required
+                    />
+                  </div>
+
+                  <div class="hidden sm:block sm:col-span-3"></div>
+
+                  <div class="col-span-6 sm:col-span-3">
+                    <x-text-field
+                      name="password"
+                      type="password"
+                      label="New Password"
+                      autocomplete="new-password"
+                      required
+                    />
+                  </div>
+
+                  <div class="hidden sm:block sm:col-span-3"></div>
+
+                  <div class="col-span-6 sm:col-span-3">
+                    <x-text-field
+                      name="password_confirmation"
+                      type="password"
+                      label="Confirm Password"
+                      autocomplete="new-password"
+                      required
+                    />
+                  </div>
+
+                  <div class="hidden sm:block sm:col-span-3"></div>
+                </div>
+              </div>
+              <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                <x-button>Save</x-button>
+              </div>
+            </div>
+          </x-form>
+        </div>
+      </div>
+    </div>
+
+    <div class="hidden sm:block">
+      <div class="py-5">
+        <div class="border-t border-gray-200"></div>
+      </div>
+    </div>
+
   <div class="mt-10 sm:mt-0">
     <div class="md:grid md:grid-cols-3 md:gap-6">
       <div class="md:col-span-1">

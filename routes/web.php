@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\DownloadInvoiceController;
 use App\Http\Controllers\InviteUserController;
 use App\Http\Controllers\InvoicesController;
@@ -27,6 +28,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::post('password', ChangePasswordController::class)->name('password.change');
 });
 
 Route::view('admin', 'admin.dashboard')->name('admin.dashboard');
