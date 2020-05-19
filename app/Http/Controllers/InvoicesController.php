@@ -77,4 +77,12 @@ class InvoicesController
 
         return redirect()->route('invoices.show', $invoice);
     }
+
+    public function destroy(Invoice $invoice): RedirectResponse
+    {
+        Storage::delete($invoice->pdf_file_path);
+        $invoice->delete();
+
+        return redirect()->route('invoices.index');
+    }
 }

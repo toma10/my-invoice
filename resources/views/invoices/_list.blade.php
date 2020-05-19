@@ -55,7 +55,9 @@
               </td>
               <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium space-x-2">
                 <x-link href="{{ route('invoices.edit', $invoice) }}" class="text-indigo-600 hover:text-indigo-900">Edit</x-link>
-                <x-link href="#" class="text-indigo-600 hover:text-indigo-900">Delete</x-link>
+                <x-form :action="route('invoices.destroy', $invoice)" class="inline-block" method="DELETE">
+                  <x-button as-link>Delete</x-button>
+                </x-form>
               </td>
             </tr>
           @endforeach
