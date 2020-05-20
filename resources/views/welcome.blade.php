@@ -10,7 +10,7 @@
       <x-text-field type="password" name="password" label="Password" autocomplete="new-password" required />
       <x-text-field type="password" name="password_confirmation" label="Confirm Password" autocomplete="new-password" required />
       <x-hidden-field name="token" :value="$token" />
-      <x-button>Setup Account</x-button>
+      <x-button full-width>Setup Account</x-button>
     </div>
   </x-form>
 </x-auth.panel>
