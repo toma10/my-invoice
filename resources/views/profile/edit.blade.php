@@ -64,6 +64,8 @@
             <div class="border border-gray-100 shadow-md overflow-hidden sm:rounded-md">
               <div class="px-4 py-5 bg-white sm:p-6">
                 <div class="grid grid-cols-6 gap-6">
+                  <x-hidden-field name="email" :value="$user->email" />
+
                   <div class="col-span-6 sm:col-span-3">
                     <x-text-field
                       name="current_password"
