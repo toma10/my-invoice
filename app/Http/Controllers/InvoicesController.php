@@ -42,6 +42,8 @@ class InvoicesController
             $invoice = Invoice::make($data)
         );
 
+        flash()->success(trans('messages.invoice.created'));
+
         return redirect()->route('invoices.show', $invoice);
     }
 
@@ -75,6 +77,8 @@ class InvoicesController
         $data = Arr::except($data, 'pdf_file');
         $invoice->update($data);
 
+        flash()->success(trans('messages.invoice.updated'));
+
         return redirect()->route('invoices.show', $invoice);
     }
 
@@ -82,6 +86,8 @@ class InvoicesController
     {
         Storage::delete($invoice->pdf_file_path);
         $invoice->delete();
+
+        flash()->success(trans('messages.invoice.deleted'));
 
         return redirect()->route('invoices.index');
     }

@@ -29,7 +29,9 @@ class ChangePasswordTest extends TestCase
             'password_confirmation' => 'new-password',
         ]);
 
-        $response->assertRedirect('profile/edit');
+        $response
+            ->assertRedirect('profile/edit')
+            ->assertSessionHasFlashMessage('success');
         $this->assertTrue(Hash::check('new-password', $user->fresh()->password));
     }
 

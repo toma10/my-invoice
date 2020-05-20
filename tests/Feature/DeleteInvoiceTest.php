@@ -46,7 +46,8 @@ class DeleteInvoiceTest extends TestCase
         $response = $this->actingAs($user)
             ->delete("invoices/{$invoice->id}");
 
-        $response->assertRedirect('/');
+        $response->assertRedirect('/')
+            ->assertSessionHasFlashMessage('success');
         $this->assertDatabaseMissing('invoices', ['id' => $invoice->id]);
         Storage::assertMissing($invoice->pdf_file_path);
     }

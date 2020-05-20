@@ -11,6 +11,8 @@ class ChangePasswordController
     {
         $request->user()->update(['password' => bcrypt($request->password)]);
 
+        flash()->success(trans('messages.profile.password_changed'));
+
         return back();
     }
 }

@@ -28,6 +28,8 @@ class SetupAccountController
 
         Auth::login($user);
 
+        flash()->success(trans('messages.account.activated'));
+
         return redirect()->route('invoices.index');
     }
 }

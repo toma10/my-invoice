@@ -65,6 +65,7 @@ class CreateInvoiceTest extends TestCase
             'note' => 'Refactoring + design',
         ]);
 
+        $response->assertSessionHasFlashMessage('success');
         $this->assertDatabaseHas('invoices', [
             'company_registration_number' => '01234567',
             'user_id' => $user->id,

@@ -54,7 +54,9 @@ class SetupAccountTest extends TestCase
             'token' => $token,
         ]);
 
-        $response->assertRedirect('/');
+        $response
+            ->assertRedirect('/')
+            ->assertSessionHasFlashMessage('success');
         $this->assertAuthenticated();
         tap($user->fresh(), function ($user) {
             $this->assertNotNull($user->password);

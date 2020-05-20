@@ -27,6 +27,8 @@ class ProfileController
     {
         $request->user()->update($request->validated());
 
+        flash()->success(trans('messages.profile.updated'));
+
         return back();
     }
 }

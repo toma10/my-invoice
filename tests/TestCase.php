@@ -5,6 +5,7 @@ namespace Tests;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Collection;
 use Illuminate\Testing\Assert;
+use Illuminate\Testing\TestResponse;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -21,6 +22,16 @@ abstract class TestCase extends BaseTestCase
                     'Failed asserting that the collection contains the specified value.'
                 );
             });
+        });
+
+        TestResponse::macro('assertSessionHasFlashMessage', function (?string $level) {
+            Assert::assertNotEmpty(flash()->message, 'Session is missing flash message.');
+
+            $actualLevel = flash()->level;
+
+            if ($level) {
+                Assert::assertEquals($level, $actualLevel, "Expected '${level}' flash message level, but got '${actualLevel}'.");
+            }
         });
     }
 }

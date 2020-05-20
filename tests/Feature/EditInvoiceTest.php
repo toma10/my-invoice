@@ -93,6 +93,9 @@ class EditInvoiceTest extends TestCase
             'note' => 'New eshop',
         ]);
 
+        $response
+            ->assertRedirect("invoices/{$invoice->id}")
+            ->assertSessionHasFlashMessage('success');
         $this->assertDatabaseHas('invoices', [
             'company_registration_number' => '76543210',
             'user_id' => $user->id,
@@ -110,7 +113,6 @@ class EditInvoiceTest extends TestCase
             'pdf_file_filename' => 'invoice-2020-06.pdf',
             'note' => 'New eshop',
         ]);
-        $response->assertRedirect("invoices/{$invoice->id}");
         tap($invoice->fresh(), function ($invoice) use ($pdfPath) {
             Storage::assertExists($invoice->pdf_file_path);
             Storage::assertMissing($pdfPath);
