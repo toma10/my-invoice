@@ -21,13 +21,13 @@ class RedirectIfNotAdminTest extends TestCase
     }
 
     /** @test */
-    public function it_403_if_user_is_not_logged_in()
+    public function it_redirects_to_login_page_if_user_is_not_logged_in()
     {
         $user = factory(User::class)->create();
 
         $response = $this->get('_test/admin');
 
-        $response->assertForbidden();
+        $response->assertRedirect('login');
     }
 
     /** @test */

@@ -18,7 +18,7 @@ class RedirectIfNotAdmin
     public function handle($request, Closure $next)
     {
         if (! $request->user()) {
-            abort(Response::HTTP_FORBIDDEN);
+            return redirect()->route('login');
         }
 
         if (! $request->user()->isAdmin()) {

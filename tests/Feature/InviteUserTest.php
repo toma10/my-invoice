@@ -18,7 +18,7 @@ class InviteUserTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->post('users/invite')->assertForbidden();
+        $this->post('users/invite')->assertRedirect();
 
         $this
             ->actingAS($user)
