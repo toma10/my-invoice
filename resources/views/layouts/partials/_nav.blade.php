@@ -17,9 +17,9 @@
         </div>
         <div class="hidden md:ml-6 md:flex md:items-center space-x-4">
           @if (auth()->user()->isAdmin())
-            <a href="{{ route('admin.dashboard') }}" class="px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Administration</a>
+            <x-navigation-link :href="route('admin.dashboard')">Administration</x-navigation-link>
           @endif
-          <a href="{{ route('invoices.index') }}" class="px-3 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-gray-900 rounded-md focus:outline-none focus:text-white focus:bg-gray-700">My Invoices</a>
+          <x-navigation-link :href="route('invoices.index')">My Invoices</x-navigation-link>
         </div>
       </div>
       <div class="flex items-center">
