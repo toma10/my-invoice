@@ -32,7 +32,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('password', ChangePasswordController::class)->name('password.change');
 });
 
-Route::view('admin', 'admin.dashboard')->name('admin.dashboard');
+Route::group(['middleware' => 'admin'], function () {
+    Route::view('admin', 'admin.dashboard')->name('admin.dashboard');
+});
 
 Route::view('admin/users', 'admin.users.index')->name('admin.users.index');
 
