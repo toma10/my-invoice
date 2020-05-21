@@ -20,7 +20,7 @@ class LoginTest extends TestCase
         $this
             ->actingAs($user)
             ->get('login')
-            ->assertRedirect('/');
+            ->assertRedirect('invoices');
     }
 
     /** @test */
@@ -31,7 +31,7 @@ class LoginTest extends TestCase
         $this
             ->actingAs($user)
             ->post('login')
-            ->assertRedirect('/');
+            ->assertRedirect('invoices');
     }
 
     /** @test */
@@ -47,7 +47,7 @@ class LoginTest extends TestCase
             'password' => 'password',
         ]);
 
-        $response->assertRedirect('/');
+        $response->assertRedirect('invoices');
         $this->assertAuthenticated();
     }
 

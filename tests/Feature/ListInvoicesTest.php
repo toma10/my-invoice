@@ -16,7 +16,7 @@ class ListInvoicesTest extends TestCase
     {
         $invoice = factory(Invoice::class)->create();
 
-        $this->get('/')->assertRedirect('login');
+        $this->get('invoices')->assertRedirect('login');
     }
 
     /** @test */
@@ -28,7 +28,7 @@ class ListInvoicesTest extends TestCase
         $otherUserInvoice = factory(Invoice::class)->create(['user_id' => $otherUser]);
         $myInvoiceB = factory(Invoice::class)->create(['user_id' => $me]);
 
-        $response = $this->actingAs($me)->get('/');
+        $response = $this->actingAs($me)->get('invoices');
 
         $response
             ->assertOk()

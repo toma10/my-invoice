@@ -22,7 +22,7 @@ class SetupAccountTest extends TestCase
         $this
             ->actingAs($user)
             ->get('welcome/TOKEN')
-            ->assertRedirect('/');
+            ->assertRedirect('invoices');
     }
 
     /** @test */
@@ -33,7 +33,7 @@ class SetupAccountTest extends TestCase
         $this
             ->actingAs($user)
             ->post('welcome')
-            ->assertRedirect('/');
+            ->assertRedirect('invoices');
     }
 
     /** @test */
@@ -55,7 +55,7 @@ class SetupAccountTest extends TestCase
         ]);
 
         $response
-            ->assertRedirect('/')
+            ->assertRedirect('invoices')
             ->assertSessionHasFlashMessage('success');
         $this->assertAuthenticated();
         tap($user->fresh(), function ($user) {

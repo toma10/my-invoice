@@ -11,6 +11,8 @@ use App\Http\Controllers\SetupAccountController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', fn () => redirect()->route('invoices.index'));
+
 Route::get('login', [LoginController::class, 'show'])->middleware('guest')->name('login');
 Route::post('login', [LoginController::class, 'store'])->middleware('guest');
 Route::post('logout', LogoutController::class)->name('logout');
@@ -44,8 +46,6 @@ Route::view('admin/departments/{department}/edit', 'admin.departments.edit')->na
 Route::view('admin/invoices', 'admin.invoices.index')->name('admin.invoices.index');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', [InvoicesController::class, 'index'])->name('invoices.index');
-    Route::resource('invoices', InvoicesController::class)->except('index');
-
+    Route::resource('invoices', InvoicesController::class);
     Route::post('invoices/{invoice}/download', DownloadInvoiceController::class)->name('invoices.download');
 });
