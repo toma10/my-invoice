@@ -10,7 +10,7 @@
 </header>
 <div class="mt-12">
   <x-form :action="route('invoices.store')" enctype="multipart/form-data">
-    @include('invoices._form')
+    @include('invoices.partials._form')
   </x-form>
 </div>
 @endsection

@@ -16,10 +16,10 @@
     </div>
   </header>
   <div class="mt-12">
-    @include('invoices._list')
+    @include('invoices.partials._list')
   </div>
 
 @else
-  @include('invoices._empty')
+  @include('invoices.partials._empty')
 @endif
 @endsection
