@@ -29,7 +29,7 @@
           @foreach ($invoices as $invoice)
             <tr class="{{ $loop->odd ? 'bg-white' : 'bg-gray-50' }}">
               <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900">
-                <x-link href="{{ route('invoices.show', $invoice) }}" class="text-indigo-600 hover:text-indigo-900">
+                <x-link href="{{ route('invoices.show', $invoice) }}">
                   {{ $invoice->variable_symbol }}
                 </x-link>
               </td>
@@ -48,13 +48,13 @@
                 </span>
               </td>
               <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500 space-x-2">
-                {{-- <a href="#" class="text-indigo-600 hover:text-indigo-900">Show</a> --}}
+                {{-- <x-link href="#">Show</x-link> --}}
                 <x-form :action="route('invoices.download', $invoice)">
                   <x-button as-link>Download</x-button>
                 </x-form>
               </td>
               <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium space-x-2">
-                <x-link href="{{ route('invoices.edit', $invoice) }}" class="text-indigo-600 hover:text-indigo-900">Edit</x-link>
+                <x-link href="{{ route('invoices.edit', $invoice) }}">Edit</x-link>
                 <x-form :action="route('invoices.destroy', $invoice)" class="inline-block" method="DELETE">
                   <x-button as-link>Delete</x-button>
                 </x-form>
