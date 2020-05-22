@@ -93,9 +93,8 @@ class EditInvoiceTest extends TestCase
             'note' => 'New eshop',
         ]);
 
-        $response
-            ->assertRedirect("invoices/{$invoice->id}")
-            ->assertSessionHasFlashMessage('success');
+        $response->assertRedirect("invoices/{$invoice->id}");
+        $response->assertSessionHasFlashMessage('success');
         $this->assertDatabaseHas('invoices', [
             'company_registration_number' => '76543210',
             'user_id' => $user->id,
