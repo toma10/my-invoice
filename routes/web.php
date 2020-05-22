@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\DownloadInvoiceController;
 use App\Http\Controllers\InviteUserController;
 use App\Http\Controllers\InvoicesController;
@@ -26,26 +27,22 @@ Route::get('welcome/{token}', WelcomeController::class)->middleware('guest')->na
 Route::post('welcome', SetupAccountController::class)->middleware('guest')->name('users.setupAccount');
 Route::post('users/invite', InviteUserController::class)->middleware('admin')->name('users.invite');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::middleware('auth')->group(function () {
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::post('password', ChangePasswordController::class)->name('password.change');
-});
 
-Route::group(['middleware' => 'admin'], function () {
-    Route::view('admin', 'admin.dashboard')->name('admin.dashboard');
-});
-
-Route::view('admin/users', 'admin.users.index')->name('admin.users.index');
-
-Route::view('admin/departments', 'admin.departments.index')->name('admin.departments.index');
-Route::view('admin/departments/{department}/edit', 'admin.departments.edit')->name('admin.departments.edit');
-
-Route::view('admin/invoices', 'admin.invoices.index')->name('admin.invoices.index');
-
-Route::group(['middleware' => 'auth'], function () {
     Route::resource('invoices', InvoicesController::class);
     Route::post('invoices/{invoice}/download', DownloadInvoiceController::class)->name('invoices.download');
 });
+
+Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
+    Route::view('/', 'admin.dashboard')->name('dashboard');
+
+    Route::resource('departments', DepartmentsController::class)->except(['show', 'destroy']);
+});
+
+Route::view('admin/users', 'admin.users.index')->name('admin.users.index');
+Route::view('admin/invoices', 'admin.invoices.index')->name('admin.invoices.index');

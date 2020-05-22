@@ -8,6 +8,12 @@ return [
         'deleted' => 'Invoice was succesfully deleted.',
     ],
 
+    'department' => [
+        'created' => 'Depratment was succesfully created.',
+        'updated' => 'Depratment was succesfully updated.',
+        'deleted' => 'Depratment was succesfully deleted.',
+    ],
+
     'profile' => [
         'updated' => 'Profile was succesfully updated.',
         'password_changed' => 'Password was succesfully changed.',
