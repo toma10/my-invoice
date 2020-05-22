@@ -17,7 +17,7 @@
     <x-slot name="icon">
       <x-heroicon-o-home />
     </x-slot>
-    Departmentss
+    Departments
   </x-admin-navigation-link>
 
   <x-admin-navigation-link href="{{ route('admin.invoices.index') }}">

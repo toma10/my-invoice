@@ -1,13 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-<header>
-  <div class="flex justify-between items-center border-b border-gray-200 pb-6">
-    <h2 class="text-3xl font-bold leading-tight text-gray-900">
-      Edit Department
-    </h2>
-  </div>
-</header>
+<x-page-header>
+  <x-page-title>Edit Department</x-page-title>
+</x-page-header>
 <div class="mt-12">
   <x-form :action="route('admin.departments.update', $department)" method="PUT">
     @include('admin.departments.partials._form')

@@ -1,24 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<header>
-  <div class="flex justify-between items-center border-b border-gray-200 pb-6">
-    <div class="flex items-center space-x-3">
-      <h2 class="text-3xl font-bold leading-tight text-gray-900">
-        Invoice {{ $invoice->company_registration_number }}
-      </h2>
-      <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-blue-100 text-blue-800">
-        Created
-      </span>
-    </div>
-    <a href="{{ route('invoices.edit', 1) }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-indigo-500 border border-transparent rounded-md hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-600 active:bg-indigo-600">
-      <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-      </svg>
-      <span>Edit</span>
-    </a>
+<x-page-header>
+  <div class="flex items-center space-x-3">
+    <x-page-title>Invoice {{ $invoice->company_registration_number }}</x-page-title>
+    <x-tag variant="blue" size="md">Created</x-tag>
   </div>
-</header>
+  <x-edit-button-link :href="route('invoices.edit', $invoice)">Edit</x-edit-button-link>
+</x-page-header>
+
 <div class="mt-12">
   <div class="bg-white shadow overflow-hidden sm:rounded-lg">
     <div class="px-4 py-5 border-b border-gray-200 sm:px-6">

@@ -1,13 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-<header>
-  <div class="flex justify-between items-center border-b border-gray-200 pb-6">
-    <h2 class="text-3xl font-bold leading-tight text-gray-900">
-      Invoices
-    </h2>
-  </div>
-</header>
+<x-page-header>
+  <x-page-title>Invoices</x-page-title>
+</x-page-header>
 <div class="mt-12">
   <div class="flex flex-col">
     <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -65,9 +61,7 @@
                 14 000,00 Kč
               </td>
               <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium leading-4 bg-blue-100 text-blue-800">
-                  Created
-                </span>
+                <x-tag size="sm" variant="blue">Created</x-tag>
               </td>
             </tr>
             <tr class="bg-gray-50">
@@ -93,9 +87,7 @@
                 35 000,00 Kč
               </td>
               <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium leading-4 bg-green-100 text-green-800">
-                  Approved
-                </span>
+                <x-tag size="sm" variant="green">Approved</x-tag>
               </td>
             </tr>
             <tr class="bg-white">
@@ -121,9 +113,7 @@
                 35 000,00 Kč
               </td>
               <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium leading-4 bg-pink-100 text-pink-800">
-                  Denied
-                </span>
+                <x-tag size="sm" variant="red">Denied</x-tag>
               </td>
             </tr>
           </tbody>

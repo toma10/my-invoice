@@ -4,10 +4,10 @@ namespace App\View\Components;
 
 use Illuminate\View\View;
 
-class NavigationLink extends BaseNavigationLink
+class MobileNavigationLink extends BaseNavigationLink
 {
     public function render(): View
     {
-        return view('components.navigation-link');
+        return view('components.mobile-navigation-link');
     }
 }
