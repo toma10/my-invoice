@@ -15,11 +15,23 @@
       subtitle="Use a permanent address where you can receive mail."
     >
       <div class="col-span-6 sm:col-span-3">
-        <x-text-field name="name" label="Name" :value="$user->name" required autofocus />
+        <x-text-field
+          name="name"
+          label="Name"
+          :value="$user->name"
+          required
+          autofocus
+        />
       </div>
 
       <div class="col-span-6 sm:col-span-4">
-        <x-text-field name="email" type="email" label="Email" :value="$user->email" required />
+        <x-text-field
+          name="email"
+          type="email"
+          label="Email"
+          :value="$user->email"
+          required
+        />
       </div>
 
       <x-slot name="footer">
