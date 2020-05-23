@@ -3,7 +3,7 @@
 @section('content')
 <x-page-header>
   <x-page-title>Users</x-page-title>
-  <x-create-button-link href="#">Invite User</x-create-button-link>
+  <x-create-button-link :href="route('admin.users.invite')">Invite User</x-create-button-link>
 </x-page-header>
 <div class="mt-12">
   <div class="flex flex-col">
@@ -30,40 +30,31 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="bg-white">
-              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900">
-                <a href="#" class="text-indigo-600 hover:text-indigo-900">1</a>
-              </td>
-              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                Tomáš Máčala
-              </td>
-              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                tomas.macala@seznam.cz
-              </td>
-              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                <x-tag size="sm" variant="yellow">Admin</x-tag>
-              </td>
-              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500 space-x-2">
-                <x-tag size="sm" variant="green">Active</x-tag>
-              </td>
-            </tr>
-            <tr class="bg-gray-50">
-              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900">
-                <a href="#" class="text-indigo-600 hover:text-indigo-900">2</a>
-              </td>
-              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                John Doe
-              </td>
-              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                johndoe@example.com
-              </td>
-              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                <x-tag size="sm" variant="gray">User</x-tag>
-              </td>
-              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500 space-x-2">
-                <x-tag size="sm" variant="red">Inactive</x-tag>
-              </td>
-            </tr>
+            @foreach ($users as $user)
+              <tr class="{{ $loop->odd ? 'bg-white' : 'bg-gray-50' }}">
+                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900">
+                  <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                    {{ $user->id }}
+                  </a>
+                </td>
+                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                  {{ $user->name ?? '-' }}
+                </td>
+                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                  {{ $user->email }}
+                </td>
+                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                  @if ($user->isAdmin())
+                    <x-tag size="sm" variant="yellow">Admin</x-tag>
+                  @else
+                    <x-tag size="sm" variant="gray">User</x-tag>
+                  @endif
+                </td>
+                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500 space-x-2">
+                  <x-tag size="sm" variant="green">Active</x-tag>
+                </td>
+              </tr>
+            @endforeach
           </tbody>
         </table>
       </div>

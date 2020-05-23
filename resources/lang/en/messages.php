@@ -23,4 +23,8 @@ return [
         'activated' => 'Account has been activated.',
     ],
 
+    'users' => [
+        'invited' => 'User was invited.',
+    ],
+
 ];

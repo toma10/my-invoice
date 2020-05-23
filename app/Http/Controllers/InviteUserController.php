@@ -6,11 +6,17 @@ use App\Events\UserInvited;
 use App\Http\Requests\InviteUserRequest;
 use App\TokenGenerator;
 use App\User;
-use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class InviteUserController
 {
-    public function __invoke(InviteUserRequest $request, TokenGenerator $tokenGenerator): Response
+    public function create(): View
+    {
+        return view('admin.users.create');
+    }
+
+    public function store(InviteUserRequest $request, TokenGenerator $tokenGenerator): RedirectResponse
     {
         $user = User::invite(
             $request->email,
@@ -19,6 +25,8 @@ class InviteUserController
 
         UserInvited::dispatch($user);
 
-        return response([], Response::HTTP_CREATED);
+        flash()->success(trans('messages.users.invited'));
+
+        return back();
     }
 }

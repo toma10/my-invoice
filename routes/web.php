@@ -5,6 +5,7 @@ use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\DownloadInvoiceController;
 use App\Http\Controllers\InviteUserController;
 use App\Http\Controllers\InvoicesController;
+use App\Http\Controllers\ListUsersController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
@@ -25,7 +26,6 @@ Route::view('password/reset/{token}', 'auth.passwords.reset')->name('password.re
 
 Route::get('welcome/{token}', WelcomeController::class)->middleware('guest')->name('users.welcome');
 Route::post('welcome', SetupAccountController::class)->middleware('guest')->name('users.setupAccount');
-Route::post('users/invite', InviteUserController::class)->middleware('admin')->name('users.invite');
 
 Route::middleware('auth')->group(function () {
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
@@ -41,8 +41,11 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::view('/', 'admin.dashboard')->name('dashboard');
 
+    Route::get('users', ListUsersController::class)->name('users.index');
+    Route::get('users/invite', [InviteUserController::class, 'create'])->name('users.invite');
+    Route::post('users/invite', [InviteUserController::class, 'store']);
+
     Route::resource('departments', DepartmentsController::class)->except(['show', 'destroy']);
 });
 
-Route::view('admin/users', 'admin.users.index')->name('admin.users.index');
 Route::view('admin/invoices', 'admin.invoices.index')->name('admin.invoices.index');
