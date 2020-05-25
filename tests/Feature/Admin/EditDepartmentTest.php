@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Admin;
 
 use App\Department;
 use App\User;
@@ -12,7 +12,7 @@ class EditDepartmentTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function only_admins_can_view_edit_depratment_page()
+    public function only_admins_can_view_edit_department_page()
     {
         $user = factory(User::class)->create();
         $admin = factory(User::class)->states('admin')->create();
@@ -90,7 +90,7 @@ class EditDepartmentTest extends TestCase
     }
 
     /** @test */
-    public function name_doesn_t_have_to_be_changed()
+    public function name_doesnt_have_to_be_changed()
     {
         $admin = factory(User::class)->states('admin')->create();
         $department = factory(Department::class)->create(['name' => 'Department ABC']);

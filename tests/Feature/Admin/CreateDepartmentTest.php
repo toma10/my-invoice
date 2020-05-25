@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Admin;
 
 use App\Department;
 use App\User;
@@ -12,7 +12,7 @@ class CreateDepartmentTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function only_admins_can_view_create_depratment_page()
+    public function only_admins_can_view_create_department_page()
     {
         $user = factory(User::class)->create();
         $admin = factory(User::class)->states('admin')->create();

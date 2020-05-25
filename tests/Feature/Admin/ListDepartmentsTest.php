@@ -1,9 +1,10 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Admin;
 
 use App\Department;
 use App\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -37,7 +38,7 @@ class ListDepartmentsTest extends TestCase
             ->assertOk()
             ->assertViewHas(
                 'departments',
-                fn ($departments) => $departments->contains($departmentA) &&
+                fn (Collection $departments) => $departments->contains($departmentA) &&
                 $departments->contains($departmentB)
             );
     }

@@ -1,8 +1,9 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Admin;
 
 use App\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -36,7 +37,7 @@ class ListUsersTest extends TestCase
             ->assertOk()
             ->assertViewHas(
                 'users',
-                fn ($users) => $users->contains($admin) &&
+                fn (Collection $users) => $users->contains($admin) &&
                 $users->contains($userA) &&
                 $users->contains($userB)
             );
