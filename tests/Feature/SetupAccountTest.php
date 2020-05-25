@@ -54,9 +54,8 @@ class SetupAccountTest extends TestCase
             'token' => $token,
         ]);
 
-        $response
-            ->assertRedirect('invoices')
-            ->assertSessionHasFlashMessage('success');
+        $response->assertRedirect('invoices');
+        $response->assertSessionHasFlashMessage('success');
         $this->assertAuthenticated();
         tap($user->fresh(), function ($user) {
             $this->assertNotNull($user->password);

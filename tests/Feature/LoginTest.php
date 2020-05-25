@@ -64,9 +64,8 @@ class LoginTest extends TestCase
             'password' => 'invalid-password',
         ]);
 
-        $response
-            ->assertRedirect('login')
-            ->assertSessionHasErrors('email');
+        $response->assertRedirect('login');
+        $response->assertSessionHasErrors('email');
     }
 
     /** @test */

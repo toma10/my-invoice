@@ -23,15 +23,17 @@ class ChangePasswordTest extends TestCase
     {
         $user = factory(User::class)->create(['password' => bcrypt('password')]);
 
-        $response = $this->from('profile/edit')->actingAs($user)->post('password', [
-            'current_password' => 'password',
-            'password' => 'new-password',
-            'password_confirmation' => 'new-password',
-        ]);
+        $response = $this
+            ->from('profile/edit')
+            ->actingAs($user)
+            ->post('password', [
+                'current_password' => 'password',
+                'password' => 'new-password',
+                'password_confirmation' => 'new-password',
+            ]);
 
-        $response
-            ->assertRedirect('profile/edit')
-            ->assertSessionHasFlashMessage('success');
+        $response->assertRedirect('profile/edit');
+        $response->assertSessionHasFlashMessage('success');
         $this->assertTrue(Hash::check('new-password', $user->fresh()->password));
     }
 

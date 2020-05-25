@@ -23,8 +23,7 @@ class ViewProfileTest extends TestCase
 
         $response = $this->actingAs($user)->get('profile');
 
-        $response
-            ->assertOk()
-            ->assertSee($user->email);
+        $response->assertOk();
+        $response->assertSee($user->email);
     }
 }

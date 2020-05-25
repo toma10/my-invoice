@@ -35,9 +35,8 @@ class EditProfileTest extends TestCase
             'email' => 'johndoe@example.com',
         ]);
 
-        $response
-            ->assertRedirect('profile/edit')
-            ->assertSessionHasFlashMessage('success');
+        $response->assertRedirect('profile/edit');
+        $response->assertSessionHasFlashMessage('success');
         $this->assertDatabaseHas('users', [
             'id' => $user->id,
             'name' => $user->name,
