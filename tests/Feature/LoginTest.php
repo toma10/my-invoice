@@ -37,7 +37,7 @@ class LoginTest extends TestCase
     /** @test */
     public function successfully_logging_in()
     {
-        $user = factory(User::class)->create([
+        factory(User::class)->create([
             'email' => 'johndoe@example.com',
             'password' => bcrypt('password'),
         ]);
@@ -54,7 +54,7 @@ class LoginTest extends TestCase
     /** @test */
     public function it_returns_error_if_login_failed()
     {
-        $user = factory(User::class)->create([
+        factory(User::class)->create([
             'email' => 'johndoe@example.com',
             'password' => bcrypt('password'),
         ]);

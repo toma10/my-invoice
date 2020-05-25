@@ -57,7 +57,7 @@ class EditInvoiceTest extends TestCase
 
         $this->put("invoices/{$invoice->id}")->assertRedirect('login');
 
-        $respons = $this->actingAs($user)
+        $this->actingAs($user)
             ->put("invoices/{$otherUserInvoice->id}")
             ->assertNotFound();
     }
@@ -130,7 +130,7 @@ class EditInvoiceTest extends TestCase
         ]);
         $department = factory(Department::class)->create();
 
-        $response = $this->actingAs($user)->put("invoices/{$invoice->id}", [
+        $this->actingAs($user)->put("invoices/{$invoice->id}", [
             'company_registration_number' => '76543210',
             'department_id' => $department->id,
             'period' => '2020-06',
