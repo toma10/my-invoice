@@ -171,7 +171,7 @@ class EditInvoiceTest extends TestCase
      * @dataProvider requiredFieldsProvider
      * @test
      */
-    public function required_fields($field)
+    public function required_fields(string $field)
     {
         $user = factory(User::class)->create();
         $invoice = factory(Invoice::class)->create(['user_id' => $user]);

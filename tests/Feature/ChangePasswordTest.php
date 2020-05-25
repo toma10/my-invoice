@@ -45,7 +45,7 @@ class ChangePasswordTest extends TestCase
      * @dataProvider requiredFieldsProvider
      * @test
      */
-    public function required_fields($field)
+    public function required_fields(string $field)
     {
         $user = factory(User::class)->create(['password' => bcrypt('password')]);
 

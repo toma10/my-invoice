@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Invoice;
 use App\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -34,7 +35,7 @@ class ListInvoicesTest extends TestCase
             ->assertOk()
             ->assertViewHas(
                 'invoices',
-                fn ($invoices) => $invoices->contains($myInvoiceA) &&
+                fn (Collection $invoices) => $invoices->contains($myInvoiceA) &&
                 ! $invoices->contains($otherUserInvoice) &&
                 $invoices->contains($myInvoiceB)
             );
