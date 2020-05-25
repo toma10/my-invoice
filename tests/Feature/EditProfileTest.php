@@ -86,7 +86,7 @@ class EditProfileTest extends TestCase
     }
 
     /** @test */
-    public function user_doesn_t_have_to_change_email()
+    public function user_doesnt_have_to_change_email()
     {
         $user = factory(User::class)->create(['email' => 'johndoe@example.com']);
 

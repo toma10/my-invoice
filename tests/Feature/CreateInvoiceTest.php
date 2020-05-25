@@ -200,7 +200,7 @@ class CreateInvoiceTest extends TestCase
     }
 
     /** @test */
-    public function price_must_be_postive()
+    public function price_must_be_positive()
     {
         $user = factory(User::class)->create();
 
@@ -244,7 +244,7 @@ class CreateInvoiceTest extends TestCase
     }
 
     /** @test */
-    public function hours_must_be_postive()
+    public function hours_must_be_positive()
     {
         $user = factory(User::class)->create();
 

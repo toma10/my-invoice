@@ -90,7 +90,7 @@ class EditInvoiceTest extends TestCase
             'constant_symbol' => '321',
             'description' => 'Invoice for 06/2020.',
             'pdf_file' => $newPdf,
-            'note' => 'New eshop',
+            'note' => 'New e-shop',
         ]);
 
         $response->assertRedirect("invoices/{$invoice->id}");
@@ -110,7 +110,7 @@ class EditInvoiceTest extends TestCase
             'constant_symbol' => '321',
             'description' => 'Invoice for 06/2020.',
             'pdf_file_filename' => 'invoice-2020-06.pdf',
-            'note' => 'New eshop',
+            'note' => 'New e-shop',
         ]);
         tap($invoice->fresh(), function ($invoice) use ($pdfPath) {
             Storage::assertExists($invoice->pdf_file_path);
@@ -143,7 +143,7 @@ class EditInvoiceTest extends TestCase
             'variable_symbol' => '2020006',
             'constant_symbol' => '321',
             'description' => 'Invoice for 06/2020.',
-            'note' => 'New eshop',
+            'note' => 'New e-shop',
         ]);
 
         tap($invoice->fresh(), function ($invoice) use ($pdfPath) {
@@ -269,7 +269,7 @@ class EditInvoiceTest extends TestCase
     }
 
     /** @test */
-    public function price_must_be_postive()
+    public function price_must_be_positive()
     {
         $user = factory(User::class)->create();
         $invoice = factory(Invoice::class)->create(['user_id' => $user]);
@@ -316,7 +316,7 @@ class EditInvoiceTest extends TestCase
     }
 
     /** @test */
-    public function hours_must_be_postive()
+    public function hours_must_be_positive()
     {
         $user = factory(User::class)->create();
         $invoice = factory(Invoice::class)->create(['user_id' => $user]);
@@ -410,7 +410,7 @@ class EditInvoiceTest extends TestCase
             'constant_symbol' => '321',
             'description' => 'Invoice for 06/2020.',
             'pdf_file' => $pdf,
-            'note' => 'New eshop',
+            'note' => 'New e-shop',
         ], $overrides);
     }
 }

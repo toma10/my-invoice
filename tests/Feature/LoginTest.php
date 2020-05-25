@@ -35,7 +35,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function succesfully_logging_in()
+    public function successfully_logging_in()
     {
         $user = factory(User::class)->create([
             'email' => 'johndoe@example.com',
