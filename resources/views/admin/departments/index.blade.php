@@ -25,7 +25,9 @@
             @foreach ($departments as $department)
               <tr class="{{ $loop->odd ? 'bg-white' : 'bg-gray-50' }}">
                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900">
-                  {{ $department->id }}
+                  <x-link href="#">
+                     {{ $department->id }}
+                  </x-link>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
                   {{ $department->name }}
