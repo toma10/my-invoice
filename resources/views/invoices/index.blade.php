@@ -8,6 +8,7 @@
   </x-page-header>
   <div class="mt-12">
     @include('invoices.partials._list')
+    {{ $invoices->links('layouts.partials._paginator') }}
   </div>
 @else
   @include('invoices.partials._empty')

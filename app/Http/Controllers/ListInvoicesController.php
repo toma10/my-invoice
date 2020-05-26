@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Invoice;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ListInvoicesController
 {
-    public function __invoke(Request $request)
+    public function __invoke(): View
     {
-        $invoices = Invoice::all();
+        $invoices = Invoice::latest()->paginate();
 
         return view('admin.invoices.index', compact('invoices'));
     }

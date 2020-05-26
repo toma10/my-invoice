@@ -10,6 +10,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $perPage = 20;
+
     protected $casts = [
         'is_admin' => 'bool',
     ];

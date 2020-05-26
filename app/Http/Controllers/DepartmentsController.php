@@ -12,7 +12,7 @@ class DepartmentsController
 {
     public function index(): View
     {
-        $departments = Department::all();
+        $departments = Department::orderBy('id')->get();
 
         return view('admin.departments.index', compact('departments'));
     }

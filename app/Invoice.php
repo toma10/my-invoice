@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Invoice extends Model
 {
+    protected $perPage = 20;
+
     protected $casts = [
         'currency' => Currency::class,
         'price' => 'float',

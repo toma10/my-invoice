@@ -9,7 +9,7 @@ class ListUsersController
 {
     public function __invoke(): View
     {
-        $users = User::all();
+        $users = User::orderBy('id')->paginate();
 
         return view('admin.users.index', compact('users'));
     }

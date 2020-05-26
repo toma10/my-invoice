@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use App\Invoice;
 use App\User;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Tests\TestCase;
 
 class ListInvoicesTest extends TestCase
@@ -35,7 +35,7 @@ class ListInvoicesTest extends TestCase
             ->assertOk()
             ->assertViewHas(
                 'invoices',
-                fn (Collection $invoices) => $invoices->contains($myInvoiceA) &&
+                fn (LengthAwarePaginator $invoices) => $invoices->contains($myInvoiceA) &&
                 ! $invoices->contains($otherUserInvoice) &&
                 $invoices->contains($myInvoiceB)
             );

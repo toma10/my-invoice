@@ -15,7 +15,9 @@ class InvoicesController
 {
     public function index(Request $request): View
     {
-        $invoices = $request->user()->invoices;
+        $invoices = Invoice::where('user_id', $request->user()->id)
+            ->latest()
+            ->paginate();
 
         return view('invoices.index', compact('invoices'));
     }
