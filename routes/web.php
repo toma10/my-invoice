@@ -5,6 +5,7 @@ use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\DownloadInvoiceController;
 use App\Http\Controllers\InviteUserController;
 use App\Http\Controllers\InvoicesController;
+use App\Http\Controllers\ListInvoicesController;
 use App\Http\Controllers\ListUsersController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -46,6 +47,6 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::post('users/invite', [InviteUserController::class, 'store']);
 
     Route::resource('departments', DepartmentsController::class)->except(['show', 'destroy']);
-});
 
-Route::view('admin/invoices', 'admin.invoices.index')->name('admin.invoices.index');
+    Route::get('invoices', ListInvoicesController::class)->name('invoices.index');
+});
