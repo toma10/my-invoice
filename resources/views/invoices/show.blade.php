@@ -3,7 +3,7 @@
 @section('content')
 <x-page-header>
   <div class="flex items-center space-x-3">
-    <x-page-title>Invoice {{ $invoice->company_registration_number }}</x-page-title>
+    <x-page-title>Invoice {{ $invoice->variable_symbol }}</x-page-title>
     <x-tag variant="blue" size="md">Created</x-tag>
   </div>
   <x-edit-button-link :href="route('invoices.edit', $invoice)">Edit</x-edit-button-link>
