@@ -25,6 +25,7 @@
   <button
     type="{{ $type }}"
     class="{{ $asLink ? $classes['link']  : $classes['button'] }}"
+    {{ $attributes }}
   >
     {{ $slot }}
   </button>
