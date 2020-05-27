@@ -42,7 +42,7 @@
 
   <x-form-panel-divider />
 
-  <x-form :action="route('password.change')" method="PUT">
+  <x-form :action="route('password.change')">
     <x-form-panel
       title="Change password"
       subtitle="Change your current password."
