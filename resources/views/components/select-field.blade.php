@@ -5,7 +5,7 @@
   'value' => null,
 ])
 
-<label for="department" class="block text-sm font-medium leading-5 text-gray-700">
+<label for="{{ $name }}" class="block text-sm font-medium leading-5 text-gray-700">
   {{ $label }}
 </label>
 <select
