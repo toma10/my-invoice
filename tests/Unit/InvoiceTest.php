@@ -7,6 +7,7 @@ use App\Events\InvoiceApproved;
 use App\Events\InvoiceCreated;
 use App\Events\InvoiceDenied;
 use App\Invoice;
+use App\InvoiceActivityTypes;
 use App\InvoiceStatus;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -79,5 +80,18 @@ class InvoiceTest extends TestCase
 
         $this->assertTrue($invoice->status->is(InvoiceStatus::fromName('denied')));
         Event::assertDispatched(InvoiceDenied::class, fn (InvoiceDenied $event) => $event->invoice->is($invoice));
+    }
+
+    /** @test */
+    public function it_logs_activity()
+    {
+        $user = factory(User::class)->create();
+        $invoice = factory(Invoice::class)->create();
+
+        $invoice->logActivity(InvoiceActivityTypes::CREATED, $user);
+
+        $this->assertCount(1, $invoice->activity);
+        $this->assertTrue($invoice->activity->first()->subject->is($invoice));
+        $this->assertTrue($invoice->activity->first()->causer->is($user));
     }
 }

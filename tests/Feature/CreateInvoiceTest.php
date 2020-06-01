@@ -4,11 +4,13 @@ namespace Tests\Feature;
 
 use App\Department;
 use App\Invoice;
+use App\InvoiceActivityTypes;
 use App\User;
 use Generator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Activitylog\Models\Activity;
 use Tests\TestCase;
 
 class CreateInvoiceTest extends TestCase
@@ -85,6 +87,9 @@ class CreateInvoiceTest extends TestCase
         ]);
         tap(Invoice::first(), function (Invoice $invoice) use ($response) {
             $response->assertRedirect("invoices/{$invoice->id}");
+            $invoice->activity->assertContains(
+                fn (Activity $activity) => $activity->description === InvoiceActivityTypes::CREATED
+            );
             Storage::assertExists($invoice->pdf_file_path);
         });
     }

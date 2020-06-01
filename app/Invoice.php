@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Invoice extends Model
 {
-    use HasStatus;
+    use HasStatus, LogsActivity;
 
     protected $perPage = 20;
 

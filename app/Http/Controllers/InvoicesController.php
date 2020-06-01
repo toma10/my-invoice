@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\InvoiceRequest;
 use App\Invoice;
+use App\InvoiceActivityTypes;
 use App\ViewModels\InvoiceViewModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -43,6 +44,8 @@ class InvoicesController
         $request->user()->addInvoice(
             $invoice = Invoice::make($data)
         );
+
+        $invoice->logActivity(InvoiceActivityTypes::CREATED, $request->user());
 
         flash()->success(trans('messages.invoice.created'));
 

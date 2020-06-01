@@ -3,9 +3,11 @@
 namespace Tests\Feature\Admin;
 
 use App\Invoice;
+use App\InvoiceActivityTypes;
 use App\InvoiceStatus;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Spatie\Activitylog\Models\Activity;
 use Tests\TestCase;
 
 class ApproveInvoiceTest extends TestCase
@@ -40,6 +42,9 @@ class ApproveInvoiceTest extends TestCase
         $response->assertRedirect("admin/invoices/{$invoice->id}");
         tap($invoice->fresh(), function (Invoice $invoice) {
             $this->assertTrue($invoice->status->is(InvoiceStatus::fromName('approved')));
+            $invoice->activity->assertContains(
+                fn (Activity $activity) => $activity->description === InvoiceActivityTypes::APPROVED
+            );
         });
     }
 
