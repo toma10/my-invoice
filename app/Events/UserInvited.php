@@ -3,13 +3,9 @@
 namespace App\Events;
 
 use App\User;
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
 
-class UserInvited
+class UserInvited extends Event
 {
-    use Dispatchable, SerializesModels;
-
     public User $user;
 
     public function __construct(User $user)

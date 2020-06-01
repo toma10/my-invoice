@@ -28,7 +28,7 @@
           {{ number_format($invoice->price, 2) }} {{ $invoice->currency }}
         </x-table.td>
         <x-table.td>
-          <x-tag size="sm" variant="blue">Created</x-tag>
+          <x-invoice-status :status="$invoice->status" size="sm" />
         </x-table.td>
         <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500 space-x-2">
           {{-- <x-link href="#">Show</x-link> --}}

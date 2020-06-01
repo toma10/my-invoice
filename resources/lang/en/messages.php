@@ -6,6 +6,8 @@ return [
         'created' => 'Invoice was succesfully created.',
         'updated' => 'Invoice was succesfully updated.',
         'deleted' => 'Invoice was succesfully deleted.',
+        'approved' => 'Invoice was succesfully approved.',
+        'denied' => 'Invoice was succesfully denied.',
     ],
 
     'department' => [

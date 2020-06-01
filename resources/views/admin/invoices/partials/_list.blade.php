@@ -42,7 +42,7 @@
           {{ number_format($invoice->price, 2) }} {{ $invoice->currency }}
         </x-table.td>
         <x-table.td>
-          <x-tag size="sm" variant="blue">Created</x-tag>
+          <x-invoice-status :status="$invoice->status" size="sm" />
         </x-table.td>
       </tr>
     @endforeach

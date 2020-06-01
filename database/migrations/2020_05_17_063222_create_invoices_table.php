@@ -31,6 +31,7 @@ class CreateInvoicesTable extends Migration
             $table->string('pdf_file_filename');
             $table->string('pdf_file_path');
             $table->text('description');
+            $table->foreignId('status_id');
             $table->text('note')->nullable();
             $table->timestamps();
         });

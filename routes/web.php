@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ApproveInvoiceController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\DenyInvoiceController;
 use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\DownloadInvoiceController;
 use App\Http\Controllers\InviteUserController;
@@ -57,4 +59,6 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::resource('departments', DepartmentsController::class)->except(['show', 'destroy']);
 
     Route::get('invoices', ListInvoicesController::class)->name('invoices.index');
+    Route::post('approved-invoices', ApproveInvoiceController::class)->name('approveInvoice');
+    Route::post('denied-invoices', DenyInvoiceController::class)->name('denyInvoice');
 });
