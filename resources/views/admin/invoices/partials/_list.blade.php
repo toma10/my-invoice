@@ -15,7 +15,7 @@
     @foreach ($invoices as $invoice)
       <tr class="{{ $loop->odd ? 'bg-white' : 'bg-gray-50' }}">
         <x-table.td>
-          <x-link href="#">
+          <x-link :href="route('admin.invoices.show', $invoice)">
             {{ $invoice->id }}
           </x-link>
         </x-table.td>

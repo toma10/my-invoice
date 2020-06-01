@@ -54,7 +54,9 @@ class InvoicesController
 
     public function show(Invoice $invoice): View
     {
-        return view('invoices.show', compact('invoice'));
+        $activityLog = $invoice->activity()->latest()->get();
+
+        return view('invoices.show', compact('invoice', 'activityLog'));
     }
 
     public function edit(Invoice $invoice): View

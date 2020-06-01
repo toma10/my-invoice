@@ -15,6 +15,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RequestResetPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SetupAccountController;
+use App\Http\Controllers\ShowInvoiceController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +60,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::resource('departments', DepartmentsController::class)->except(['show', 'destroy']);
 
     Route::get('invoices', ListInvoicesController::class)->name('invoices.index');
+    Route::get('invoices/{invoice}', ShowInvoiceController::class)->name('invoices.show');
     Route::post('approved-invoices', ApproveInvoiceController::class)->name('approveInvoice');
     Route::post('denied-invoices', DenyInvoiceController::class)->name('denyInvoice');
 });

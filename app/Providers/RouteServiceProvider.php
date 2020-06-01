@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Invoice;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,10 @@ class RouteServiceProvider extends ServiceProvider
             $user = auth()->user();
 
             abort_if(! $user, Response::HTTP_NOT_FOUND);
+
+            if ($user->isAdmin()) {
+                return Invoice::findOrFail($id);
+            }
 
             return $user->invoices()->where('id', $id)->firstOrFail();
         });
