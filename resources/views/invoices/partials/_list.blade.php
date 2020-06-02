@@ -37,16 +37,18 @@
           </x-form>
         </td>
         <x-table.td aligt-right>
-          <x-link href="{{ route('invoices.edit', $invoice) }}">Edit</x-link>
-          <x-delete-modal
-            :action="route('invoices.destroy', $invoice)"
-            title="Delete Invoice"
-            body="Are you sure you want to delete invoice? This action cannot be undone."
-          >
-            <x-button type="button" as-link @click="$dispatch('open')">
-              Delete
-            </x-button>
-          </x-delete-modal>
+          @if (! $invoice->isClosed())
+            <x-link href="{{ route('invoices.edit', $invoice) }}">Edit</x-link>
+            <x-delete-modal
+              :action="route('invoices.destroy', $invoice)"
+              title="Delete Invoice"
+              body="Are you sure you want to delete invoice? This action cannot be undone."
+            >
+              <x-button type="button" as-link @click="$dispatch('open')">
+                Delete
+              </x-button>
+            </x-delete-modal>
+          @endif
         </x-table.td>
       </tr>
     @endforeach

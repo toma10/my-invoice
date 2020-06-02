@@ -41,7 +41,7 @@ class DenyInvoiceTest extends TestCase
         $response->assertSessionHasFlashMessage('success');
         $response->assertRedirect("admin/invoices/{$invoice->id}");
         tap($invoice->fresh(), function (Invoice $invoice) {
-            $this->assertTrue($invoice->status->is(InvoiceStatus::fromName('denied')));
+            $this->assertTrue($invoice->status->is(InvoiceStatus::fromName(InvoiceStatus::DENIED)));
             $invoice->activity->assertContains(
                 fn (Activity $activity) => $activity->description === InvoiceActivityTypes::DENIED
             );
@@ -67,5 +67,25 @@ class DenyInvoiceTest extends TestCase
             ->post('admin/denied-invoices', ['invoice_id' => 999]);
 
         $response->assertNotFound();
+    }
+
+    /** @test */
+    public function it_cannot_be_approved_if_invoice_is_already_denied_or_approved()
+    {
+        $admin = factory(User::class)->states('admin')->create();
+        $approvedInvoice = factory(Invoice::class)->create();
+        $approvedInvoice->approve();
+        $deniedInvoice = factory(Invoice::class)->create();
+        $deniedInvoice->deny();
+
+        $this
+            ->actingAS($admin)
+            ->post('admin/denied-invoices', ['invoice_id' => $approvedInvoice->id])
+            ->assertForbidden();
+
+        $this
+            ->actingAS($admin)
+            ->post('admin/denied-invoices', ['invoice_id' => $deniedInvoice->id])
+            ->assertForbidden();
     }
 }

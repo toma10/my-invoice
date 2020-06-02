@@ -12,7 +12,7 @@ trait HasStatus
     public static function bootHasStatus(): void
     {
         static::creating(function (Invoice $invoice) {
-            $invoice->status_id = InvoiceStatus::fromName('created')->id;
+            $invoice->status_id = InvoiceStatus::fromName(InvoiceStatus::CREATED)->id;
         });
 
         static::created(function (Invoice $invoice) {
@@ -20,16 +20,26 @@ trait HasStatus
         });
     }
 
+    public function isApproved(): bool
+    {
+        return optional($this->status)->name === InvoiceStatus::APPROVED;
+    }
+
+    public function isDenied(): bool
+    {
+        return optional($this->status)->name === InvoiceStatus::DENIED;
+    }
+
     public function approve(): void
     {
-        $this->update(['status_id' => InvoiceStatus::fromName('approved')->id]);
+        $this->update(['status_id' => InvoiceStatus::fromName(InvoiceStatus::APPROVED)->id]);
 
         event(new InvoiceApproved($this));
     }
 
     public function deny(): void
     {
-        $this->update(['status_id' => InvoiceStatus::fromName('denied')->id]);
+        $this->update(['status_id' => InvoiceStatus::fromName(InvoiceStatus::DENIED)->id]);
 
         event(new InvoiceDenied($this));
     }

@@ -8,6 +8,7 @@ use App\InvoiceActivityTypes;
 use App\ViewModels\InvoiceViewModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -61,6 +62,8 @@ class InvoicesController
 
     public function edit(Invoice $invoice): View
     {
+        abort_if($invoice->isClosed(), Response::HTTP_FORBIDDEN);
+
         $viewModel = new InvoiceViewModel($invoice);
 
         return view('invoices.edit', $viewModel);
@@ -68,6 +71,8 @@ class InvoicesController
 
     public function update(InvoiceRequest $request, Invoice $invoice): RedirectResponse
     {
+        abort_if($invoice->isClosed(), Response::HTTP_FORBIDDEN);
+
         $data = $request->validated();
 
         if (isset($data['pdf_file'])) {
@@ -91,6 +96,8 @@ class InvoicesController
 
     public function destroy(Invoice $invoice): RedirectResponse
     {
+        abort_if($invoice->isClosed(), Response::HTTP_FORBIDDEN);
+
         Storage::delete($invoice->pdf_file_path);
         $invoice->delete();
 

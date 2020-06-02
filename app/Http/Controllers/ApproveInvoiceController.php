@@ -6,6 +6,7 @@ use App\Invoice;
 use App\InvoiceActivityTypes;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ApproveInvoiceController
 {
@@ -13,6 +14,8 @@ class ApproveInvoiceController
     {
         /** @var Invoice $invoice */
         $invoice = Invoice::findOrFail($request->invoice_id);
+
+        abort_if($invoice->isClosed(), Response::HTTP_FORBIDDEN);
 
         $invoice->approve();
 

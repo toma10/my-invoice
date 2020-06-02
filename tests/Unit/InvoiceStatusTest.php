@@ -10,9 +10,9 @@ class InvoiceStatusTest extends TestCase
 {
     public function statusNamesProvider(): Generator
     {
-        yield ['created'];
-        yield ['approved'];
-        yield ['denied'];
+        yield [InvoiceStatus::CREATED];
+        yield [InvoiceStatus::APPROVED];
+        yield [InvoiceStatus::DENIED];
     }
 
     /**

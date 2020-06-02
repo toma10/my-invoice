@@ -9,22 +9,28 @@ class InvoiceStatus extends Model
 {
     use Sushi;
 
+    public const CREATED = 'created';
+
+    public const APPROVED = 'approved';
+
+    public const DENIED = 'denied';
+
     /**
      * @var array
      */
     protected $rows = [
         [
-            'name' => 'created',
+            'name' => self::CREATED,
             'label' => 'Created',
             'color' => 'blue',
         ],
         [
-            'name' => 'approved',
+            'name' => self::APPROVED,
             'label' => 'Approved',
             'color' => 'green',
         ],
         [
-            'name' => 'denied',
+            'name' => self::DENIED,
             'label' => 'Denied',
             'color' => 'red',
         ],

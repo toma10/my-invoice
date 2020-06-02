@@ -9,6 +9,7 @@ use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenPrivateMethods;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenTraits;
 use NunoMaduro\PhpInsights\Domain\Metrics\Architecture\Classes;
 use ObjectCalisthenics\Sniffs\Classes\ForbiddenPublicPropertySniff;
+use ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UselessOverridingMethodSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
 use SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff;
@@ -102,6 +103,9 @@ return [
             'exclude' => [
                 'app/Events',
             ],
+        ],
+        FunctionLengthSniff::class => [
+            'maxLength' => 25,
         ],
         UnusedParameterSniff::class => [
             'exclude' => [

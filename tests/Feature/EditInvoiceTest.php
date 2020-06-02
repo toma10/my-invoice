@@ -152,6 +152,36 @@ class EditInvoiceTest extends TestCase
         });
     }
 
+    /** @test */
+    public function user_cannot_update_invoice_when_invoice_is_approved_or_denied()
+    {
+        $user = factory(User::class)->create();
+        $approvedInvoice = factory(Invoice::class)->create(['user_id' => $user]);
+        $approvedInvoice->approve();
+        $deniedInvoice = factory(Invoice::class)->create(['user_id' => $user]);
+        $deniedInvoice->deny();
+
+        $this
+            ->actingAs($user)
+            ->get("invoices/{$approvedInvoice->id}/edit")
+            ->assertForbidden();
+
+        $this
+            ->actingAs($user)
+            ->put("invoices/{$approvedInvoice->id}", $this->getValidParams())
+            ->assertForbidden();
+
+        $this
+            ->actingAs($user)
+            ->get("invoices/{$deniedInvoice->id}/edit")
+            ->assertForbidden();
+
+        $this
+            ->actingAs($user)
+            ->put("invoices/{$deniedInvoice->id}", $this->getValidParams())
+            ->assertForbidden();
+    }
+
     public function requiredFieldsProvider(): Generator
     {
         yield ['company_registration_number'];

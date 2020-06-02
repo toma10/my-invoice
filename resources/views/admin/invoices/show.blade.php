@@ -11,17 +11,19 @@
 <div class="mt-12">
   @include('invoices.partials._basicInformation')
 
-  @if($invoice->status->name === 'created')
+  @if($invoice->status->name === \App\InvoiceStatus::CREATED)
     <div class="mt-8 border-t border-gray-200 pt-5">
       <div class="flex justify-end space-x-3">
-        <x-form :action="route('admin.denyInvoice', $invoice)" class="inline-flex">
-          <x-hidden-field name="invoice_id" :value="$invoice->id" />
-          <x-button variant="danger">Deny</x-button>
-        </x-form>
-        <x-form :action="route('admin.approveInvoice')" class="inline-flex">
-          <x-hidden-field name="invoice_id" :value="$invoice->id" />
-          <x-button>Approve</x-button>
-        </x-form>
+        @if(! $invoice->isClosed())
+          <x-form :action="route('admin.denyInvoice', $invoice)" class="inline-flex">
+            <x-hidden-field name="invoice_id" :value="$invoice->id" />
+            <x-button variant="danger">Deny</x-button>
+          </x-form>
+          <x-form :action="route('admin.approveInvoice')" class="inline-flex">
+            <x-hidden-field name="invoice_id" :value="$invoice->id" />
+            <x-button>Approve</x-button>
+          </x-form>
+        @endif
       </div>
     @endif
   </div>

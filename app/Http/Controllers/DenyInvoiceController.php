@@ -6,6 +6,7 @@ use App\Invoice;
 use App\InvoiceActivityTypes;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class DenyInvoiceController
 {
@@ -13,6 +14,8 @@ class DenyInvoiceController
     {
         /** @var Invoice $invoice */
         $invoice = Invoice::findOrFail($request->invoice_id);
+
+        abort_if($invoice->isClosed(), Response::HTTP_FORBIDDEN);
 
         $invoice->deny();
 

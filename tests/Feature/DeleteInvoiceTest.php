@@ -50,4 +50,24 @@ class DeleteInvoiceTest extends TestCase
         $this->assertDatabaseMissing('invoices', ['id' => $invoice->id]);
         Storage::assertMissing($invoice->pdf_file_path);
     }
+
+    /** @test */
+    public function user_cannot_delete_invoice_when_invoice_is_approved_or_denied()
+    {
+        $user = factory(User::class)->create();
+        $approvedInvoice = factory(Invoice::class)->create(['user_id' => $user]);
+        $approvedInvoice->approve();
+        $deniedInvoice = factory(Invoice::class)->create(['user_id' => $user]);
+        $deniedInvoice->deny();
+
+        $this
+            ->actingAs($user)
+            ->delete("invoices/{$approvedInvoice->id}")
+            ->assertForbidden();
+
+        $this
+            ->actingAs($user)
+            ->delete("invoices/{$deniedInvoice->id}")
+            ->assertForbidden();
+    }
 }
