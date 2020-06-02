@@ -15,14 +15,22 @@
     <div class="mt-8 border-t border-gray-200 pt-5">
       <div class="flex justify-end space-x-3">
         @if(! $invoice->isClosed())
-          <x-form :action="route('admin.denyInvoice', $invoice)" class="inline-flex">
+          <x-confirm-modal
+            :action="route('admin.denyInvoice')"
+            title="Deny Invoice"
+            body="Are you sure you want to deny invoice? This action cannot be undone."
+          >
             <x-hidden-field name="invoice_id" :value="$invoice->id" />
-            <x-button variant="danger">Deny</x-button>
-          </x-form>
-          <x-form :action="route('admin.approveInvoice')" class="inline-flex">
+            <x-button type="button" variant="plain" @click="$dispatch('open')">Deny</x-button>
+          </x-confirm-modal>
+          <x-confirm-modal
+            :action="route('admin.approveInvoice')"
+            title="Approve Invoice"
+            body="Are you sure you want to approve invoice? This action cannot be undone."
+          >
             <x-hidden-field name="invoice_id" :value="$invoice->id" />
-            <x-button>Approve</x-button>
-          </x-form>
+            <x-button type="button" @click="$dispatch('open')">Approve</x-button>
+          </x-confirm-modal>
         @endif
       </div>
     @endif
