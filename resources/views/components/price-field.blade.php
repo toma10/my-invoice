@@ -20,7 +20,7 @@
     />
     <div class="absolute inset-y-0 right-0 flex items-center">
       <select aria-label="Currency" name="currency" class="form-select h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm sm:leading-5" required>
-        @foreach($currencies as $currencyCode => $currnecyValue)
+        @foreach ($currencies as $currencyCode => $currnecyValue)
           <option
             value="{{ $currencyCode }}"
             {{ old('currency', $currency ?? '') == $currencyCode ? 'selected' : ''}}

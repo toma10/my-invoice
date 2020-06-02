@@ -11,7 +11,7 @@
 <div class="mt-12">
   @include('invoices.partials._basicInformation')
 
-  @if($invoice->status->name === \App\Status::CREATED)
+  @if ($invoice->status->name === \App\Status::CREATED)
     <div class="mt-8 border-t border-gray-200 pt-5">
       <div class="flex justify-end space-x-3">
         @if(! $invoice->isClosed())

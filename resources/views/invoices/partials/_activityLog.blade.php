@@ -2,7 +2,7 @@
   Activity log
 </h3>
 <ul class="mt-6 space-y-4 divide divide-gray-200">
-  @foreach($activityLog as $activity)
+  @foreach ($activityLog as $activity)
     <li>
       <div class="flex items-center">
         <div class="min-w-0 flex-1 flex items-center">

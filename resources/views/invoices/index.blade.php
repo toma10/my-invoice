@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@if(count($invoices) > 0)
+@if (count($invoices) > 0)
   <x-page-header>
     <x-page-title>My Invoices</x-page-title>
     <x-create-button-link :href="route('invoices.create')">New Invoice</x-create-button-link>
