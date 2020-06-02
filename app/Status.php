@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Sushi\Sushi;
 
-class InvoiceStatus extends Model
+class Status extends Model
 {
     use Sushi;
 
@@ -36,7 +36,7 @@ class InvoiceStatus extends Model
         ],
     ];
 
-    public static function fromName(string $name): InvoiceStatus
+    public static function fromName(string $name): Status
     {
         return static::whereName($name)->firstOrFail();
     }

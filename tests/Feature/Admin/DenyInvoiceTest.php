@@ -4,7 +4,7 @@ namespace Tests\Feature\Admin;
 
 use App\Invoice;
 use App\InvoiceActivityTypes;
-use App\InvoiceStatus;
+use App\Status;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Activitylog\Models\Activity;
@@ -41,7 +41,7 @@ class DenyInvoiceTest extends TestCase
         $response->assertSessionHasFlashMessage('success');
         $response->assertRedirect("admin/invoices/{$invoice->id}");
         tap($invoice->fresh(), function (Invoice $invoice) {
-            $this->assertTrue($invoice->status->is(InvoiceStatus::fromName(InvoiceStatus::DENIED)));
+            $this->assertTrue($invoice->status->is(Status::fromName(Status::DENIED)));
             $invoice->activity->assertContains(
                 fn (Activity $activity) => $activity->description === InvoiceActivityTypes::DENIED
             );

@@ -8,7 +8,7 @@ use App\Events\InvoiceCreated;
 use App\Events\InvoiceDenied;
 use App\Invoice;
 use App\InvoiceActivityTypes;
-use App\InvoiceStatus;
+use App\Status;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
@@ -50,7 +50,7 @@ class InvoiceTest extends TestCase
     /** @test */
     public function it_has_a_status()
     {
-        $status = InvoiceStatus::fromName(InvoiceStatus::CREATED);
+        $status = Status::fromName(Status::CREATED);
         $invoice = factory(Invoice::class)->create(['status_id' => $status]);
 
         $this->assertTrue($invoice->status->is($status));
@@ -61,36 +61,36 @@ class InvoiceTest extends TestCase
     {
         $invoice = factory(Invoice::class)->create();
 
-        $this->assertTrue($invoice->status->is(InvoiceStatus::fromName(InvoiceStatus::CREATED)));
+        $this->assertTrue($invoice->status->is(Status::fromName(Status::CREATED)));
         Event::assertDispatched(InvoiceCreated::class, fn (InvoiceCreated $event) => $event->invoice->is($invoice));
     }
 
     /** @test */
     public function it_can_be_approved()
     {
-        $invoice = factory(Invoice::class)->create(['status_id' => InvoiceStatus::fromName(InvoiceStatus::CREATED)]);
+        $invoice = factory(Invoice::class)->create(['status_id' => Status::fromName(Status::CREATED)]);
 
         $invoice->approve();
 
-        $this->assertTrue($invoice->status->is(InvoiceStatus::fromName(InvoiceStatus::APPROVED)));
+        $this->assertTrue($invoice->status->is(Status::fromName(Status::APPROVED)));
         Event::assertDispatched(InvoiceApproved::class, fn (InvoiceApproved $event) => $event->invoice->is($invoice));
     }
 
     /** @test */
     public function it_can_be_denied()
     {
-        $invoice = factory(Invoice::class)->create(['status_id' => InvoiceStatus::fromName(InvoiceStatus::CREATED)]);
+        $invoice = factory(Invoice::class)->create(['status_id' => Status::fromName(Status::CREATED)]);
 
         $invoice->deny();
 
-        $this->assertTrue($invoice->status->is(InvoiceStatus::fromName(InvoiceStatus::DENIED)));
+        $this->assertTrue($invoice->status->is(Status::fromName(Status::DENIED)));
         Event::assertDispatched(InvoiceDenied::class, fn (InvoiceDenied $event) => $event->invoice->is($invoice));
     }
 
     /** @test */
     public function it_can_determine_if_it_is_approved()
     {
-        $invoice = factory(Invoice::class)->create(['status_id' => InvoiceStatus::fromName(InvoiceStatus::CREATED)]);
+        $invoice = factory(Invoice::class)->create(['status_id' => Status::fromName(Status::CREATED)]);
         $this->assertFalse($invoice->isApproved());
 
         $invoice->approve();
@@ -101,7 +101,7 @@ class InvoiceTest extends TestCase
     /** @test */
     public function it_can_determine_if_it_is_denied()
     {
-        $invoice = factory(Invoice::class)->create(['status_id' => InvoiceStatus::fromName(InvoiceStatus::CREATED)]);
+        $invoice = factory(Invoice::class)->create(['status_id' => Status::fromName(Status::CREATED)]);
         $this->assertFalse($invoice->isDenied());
 
         $invoice->deny();
@@ -112,8 +112,8 @@ class InvoiceTest extends TestCase
     /** @test */
     public function it_can_determine_if_is_is_closed()
     {
-        $invoiceA = factory(Invoice::class)->create(['status_id' => InvoiceStatus::fromName(InvoiceStatus::CREATED)]);
-        $invoiceB = factory(Invoice::class)->create(['status_id' => InvoiceStatus::fromName(InvoiceStatus::CREATED)]);
+        $invoiceA = factory(Invoice::class)->create(['status_id' => Status::fromName(Status::CREATED)]);
+        $invoiceB = factory(Invoice::class)->create(['status_id' => Status::fromName(Status::CREATED)]);
 
         $this->assertFalse($invoiceA->isClosed());
         $this->assertFalse($invoiceB->isClosed());
