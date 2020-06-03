@@ -39,4 +39,27 @@ class DownloadInvoiceTest extends TestCase
         $this->actingAs($me)->post("invoices/{$myInvoice->id}/download")->assertOk();
         $this->actingAs($me)->post("invoices/{$otherUserInvoice->id}/download")->assertNotFound();
     }
+
+    /** @test */
+    public function admin_can_download_all_invoices()
+    {
+        $this->withoutExceptionHandling();
+        Storage::fake();
+        $pdf = File::create('invoice-2020-05.pdf');
+        $pdfPath = Storage::putFile('invoices', $pdf);
+
+        $admin = factory(User::class)->states('admin')->create();
+        $adminInvoice = factory(Invoice::class)->create([
+            'user_id' => $admin,
+            'pdf_file_path' => $pdfPath,
+        ]);
+        $otherUser = factory(User::class)->create();
+        $otherUserInvoice = factory(Invoice::class)->create([
+            'user_id' => $otherUser,
+            'pdf_file_path' => $pdfPath,
+        ]);
+
+        $this->actingAs($admin)->post("invoices/{$adminInvoice->id}/download")->assertOk();
+        $this->actingAs($admin)->post("invoices/{$otherUserInvoice->id}/download")->assertOk();
+    }
 }

@@ -12,7 +12,9 @@ class DownloadInvoiceController
 {
     public function __invoke(Request $request, Invoice $invoice): StreamedResponse
     {
-        abort_if(! $request->user()->isOwnerOf($invoice), Response::HTTP_NOT_FOUND);
+        $user = $request->user();
+
+        abort_unless($user->isOwnerOf($invoice) || $user->isAdmin(), Response::HTTP_NOT_FOUND);
 
         return Storage::download($invoice->pdf_file_path, $invoice->pdf_file_filename);
     }
