@@ -8,9 +8,13 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, CanBeDeactivated;
 
     protected $perPage = 20;
+
+    protected $dates = [
+        'deactivated_at',
+    ];
 
     protected $casts = [
         'is_admin' => 'bool',

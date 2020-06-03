@@ -12,7 +12,7 @@
     @foreach ($users as $user)
       <tr class="{{ $loop->odd ? 'bg-white' : 'bg-gray-50' }}">
         <x-table.td>
-          <x-link href="#">
+          <x-link :href="route('admin.users.show', $user)">
             {{ $user->id }}
           </x-link>
         </x-table.td>
@@ -26,7 +26,7 @@
           @endif
         </x-table.td>
         <x-table.td>
-          <x-tag size="sm" variant="green">Active</x-tag>
+          <x-user-state :user="$user" size="sm" />
         </x-table.td>
       </tr>
     @endforeach

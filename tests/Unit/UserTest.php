@@ -2,14 +2,27 @@
 
 namespace Tests\Unit;
 
+use App\Events\UserActivated;
+use App\Events\UserDeactivated;
 use App\Invoice;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        Event::fake([
+            UserActivated::class,
+            UserDeactivated::class,
+        ]);
+    }
 
     /** @test */
     public function user_can_be_found_by_email()
@@ -45,6 +58,40 @@ class UserTest extends TestCase
             $this->assertEquals('token', $user->token);
             $this->assertFalse($user->isAdmin());
         });
+    }
+
+    /** @test */
+    public function user_can_be_deactivated()
+    {
+        $user = factory(User::class)->create();
+
+        $user->deactivate();
+
+        $this->assertNotNull($user->fresh()->deactivated_at);
+        Event::assertDispatched(UserDeactivated::class, fn (UserDeactivated $event) => $event->user->is($user));
+    }
+
+    /** @test */
+    public function user_can_be_activated()
+    {
+        $user = factory(User::class)->create(['deactivated_at' => now()]);
+
+        $user->activate();
+
+        $this->assertNull($user->fresh()->deactivated_at);
+        Event::assertDispatched(UserActivated::class, fn (UserActivated $event) => $event->user->is($user));
+    }
+
+    /** @test */
+    public function it_can_determine_if_user_is_active()
+    {
+        $user = factory(User::class)->create();
+
+        $user->deactivate();
+        $this->assertFalse($user->fresh()->isActive());
+
+        $user->activate();
+        $this->assertTrue($user->fresh()->isActive());
     }
 
     /** @test */

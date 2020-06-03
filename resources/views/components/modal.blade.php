@@ -48,10 +48,10 @@
         @click.away="show = false"
       >
         <div class="sm:flex sm:items-start">
-          <div class="mx-auto flex-shrink-0">
+          <div class="flex-shrink-0">
             {{ $icon }}
           </div>
-          <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+          <div class="mt-3 text-center sm:flex-1 sm:mt-0 sm:ml-4 sm:text-left">
             <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
               {{ $title }}
             </h3>

@@ -4,7 +4,11 @@ namespace App\Providers;
 
 use App\Events\InvoiceApproved;
 use App\Events\InvoiceDenied;
+use App\Events\UserActivated;
+use App\Events\UserDeactivated;
 use App\Events\UserInvited;
+use App\Listeners\SendAccountActivatedNotificationListener;
+use App\Listeners\SendAccountDeactivatedNotificationListener;
 use App\Listeners\SendInvoiceApprovedNotificationListener;
 use App\Listeners\SendInvoiceDeniedNotificationListener;
 use App\Listeners\SendWelcomeNotificationListener;
@@ -26,6 +30,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         InvoiceDenied::class => [
             SendInvoiceDeniedNotificationListener::class,
+        ],
+        UserActivated::class => [
+            SendAccountActivatedNotificationListener::class,
+        ],
+        UserDeactivated::class => [
+            SendAccountDeactivatedNotificationListener::class,
         ],
     ];
 }

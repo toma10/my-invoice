@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ActivateUserController;
 use App\Http\Controllers\ApproveInvoiceController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\DeactivateUserController;
 use App\Http\Controllers\DenyInvoiceController;
 use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\DownloadInvoiceController;
@@ -16,6 +18,7 @@ use App\Http\Controllers\RequestResetPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SetupAccountController;
 use App\Http\Controllers\ShowInvoiceController;
+use App\Http\Controllers\ShowUserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,8 +57,13 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::view('/', 'admin.dashboard')->name('dashboard');
 
     Route::get('users', ListUsersController::class)->name('users.index');
+
     Route::get('users/invite', [InviteUserController::class, 'create'])->name('users.invite');
     Route::post('users/invite', [InviteUserController::class, 'store']);
+    Route::get('users/{user}', ShowUserController::class)->name('users.show');
+
+    Route::post('activated-users', ActivateUserController::class)->name('activateUser');
+    Route::post('deactivated-users', DeactivateUserController::class)->name('deactivateUser');
 
     Route::resource('departments', DepartmentsController::class)->except(['show', 'destroy']);
 
