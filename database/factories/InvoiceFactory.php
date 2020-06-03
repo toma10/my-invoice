@@ -17,7 +17,7 @@ $factory->define(Invoice::class, function (Faker $faker) {
         'price' => '30000',
         'currency' => 'CZK',
         'hours' => '160',
-        'variable_symbol' => '2020005',
+        'variable_symbol' => '20200005',
         'constant_symbol' => '123',
         'description' => 'Invoice for 05/2020.',
         'pdf_file_path' => 'invoices/0792f6b016af4fb5bc66f087d07fe24a.pdf',
