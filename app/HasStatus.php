@@ -5,6 +5,7 @@ namespace App;
 use App\Events\InvoiceApproved;
 use App\Events\InvoiceCreated;
 use App\Events\InvoiceDenied;
+use App\Events\InvoicePaid;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait HasStatus
@@ -20,25 +21,39 @@ trait HasStatus
         });
     }
 
-    public function isApproved(): bool
+    public function hasStatus(string $status): bool
     {
-        return optional($this->status)->name === Status::APPROVED;
-    }
-
-    public function isDenied(): bool
-    {
-        return optional($this->status)->name === Status::DENIED;
+        return optional($this->status)->name === $status;
     }
 
     public function approve(): void
     {
+        if ($this->hasStatus(Status::PAID) || $this->hasStatus(Status::DENIED)) {
+            throw new InvalidStatusTransitionException();
+        }
+
         $this->update(['status_id' => Status::fromName(Status::APPROVED)->id]);
 
         event(new InvoiceApproved($this));
     }
 
+    public function pay(): void
+    {
+        if ($this->hasStatus(Status::CREATED) || $this->hasStatus(Status::DENIED)) {
+            throw new InvalidStatusTransitionException();
+        }
+
+        $this->update(['status_id' => Status::fromName(Status::PAID)->id]);
+
+        event(new InvoicePaid($this));
+    }
+
     public function deny(): void
     {
+        if ($this->hasStatus(Status::PAID)) {
+            throw new InvalidStatusTransitionException();
+        }
+
         $this->update(['status_id' => Status::fromName(Status::DENIED)->id]);
 
         event(new InvoiceDenied($this));

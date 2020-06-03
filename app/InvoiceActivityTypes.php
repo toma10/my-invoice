@@ -8,5 +8,7 @@ class InvoiceActivityTypes
 
     public const APPROVED = 'APPROVED';
 
+    public const PAID = 'PAID';
+
     public const DENIED = 'DENIED';
 }

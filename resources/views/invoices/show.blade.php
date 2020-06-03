@@ -6,7 +6,7 @@
     <x-page-title>Invoice {{ $invoice->variable_symbol }}</x-page-title>
     <x-invoice-status :status="$invoice->status" size="md" />
   </div>
-  @if (! $invoice->isClosed())
+  @if ($invoice->hasStatus(\App\Status::CREATED))
     <x-edit-button-link :href="route('invoices.edit', $invoice)">Edit</x-edit-button-link>
   @endif
 </x-page-header>

@@ -43,7 +43,6 @@ class DownloadInvoiceTest extends TestCase
     /** @test */
     public function admin_can_download_all_invoices()
     {
-        $this->withoutExceptionHandling();
         Storage::fake();
         $pdf = File::create('invoice-2020-05.pdf');
         $pdfPath = Storage::putFile('invoices', $pdf);

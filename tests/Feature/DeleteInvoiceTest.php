@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Invoice;
+use App\Status;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Testing\File;
@@ -52,17 +53,24 @@ class DeleteInvoiceTest extends TestCase
     }
 
     /** @test */
-    public function user_cannot_delete_invoice_when_invoice_is_approved_or_denied()
+    public function user_cannot_delete_invoice_when_invoice_is_paid_or_denied()
     {
         $user = factory(User::class)->create();
         $approvedInvoice = factory(Invoice::class)->create(['user_id' => $user]);
-        $approvedInvoice->approve();
+        $approvedInvoice->update(['status_id' => Status::fromName(Status::APPROVED)->id]);
+        $paidInvoice = factory(Invoice::class)->create(['user_id' => $user]);
+        $paidInvoice->update(['status_id' => Status::fromName(Status::PAID)->id]);
         $deniedInvoice = factory(Invoice::class)->create(['user_id' => $user]);
-        $deniedInvoice->deny();
+        $deniedInvoice->update(['status_id' => Status::fromName(Status::DENIED)->id]);
 
         $this
             ->actingAs($user)
             ->delete("invoices/{$approvedInvoice->id}")
+            ->assertForbidden();
+
+        $this
+            ->actingAs($user)
+            ->delete("invoices/{$paidInvoice->id}")
             ->assertForbidden();
 
         $this

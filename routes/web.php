@@ -13,6 +13,7 @@ use App\Http\Controllers\ListInvoicesController;
 use App\Http\Controllers\ListUsersController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\PayInvoiceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RequestResetPasswordController;
 use App\Http\Controllers\ResetPasswordController;
@@ -70,5 +71,6 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::get('invoices', ListInvoicesController::class)->name('invoices.index');
     Route::get('invoices/{invoice}', ShowInvoiceController::class)->name('invoices.show');
     Route::post('approved-invoices', ApproveInvoiceController::class)->name('approveInvoice');
+    Route::post('paid-invoices', PayInvoiceController::class)->name('payInvoice');
     Route::post('denied-invoices', DenyInvoiceController::class)->name('denyInvoice');
 });

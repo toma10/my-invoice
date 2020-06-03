@@ -13,6 +13,8 @@ class Status extends Model
 
     public const APPROVED = 'approved';
 
+    public const PAID = 'paid';
+
     public const DENIED = 'denied';
 
     /**
@@ -28,6 +30,11 @@ class Status extends Model
             'name' => self::APPROVED,
             'label' => 'Approved',
             'color' => 'green',
+        ],
+        [
+            'name' => self::PAID,
+            'label' => 'Paid',
+            'color' => 'blue',
         ],
         [
             'name' => self::DENIED,

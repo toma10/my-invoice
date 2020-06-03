@@ -23,6 +23,7 @@ class ListInvoicesTest extends TestCase
     /** @test */
     public function user_see_only_his_invoices()
     {
+        $this->withoutExceptionHandling();
         $me = factory(User::class)->create();
         $myInvoiceA = factory(Invoice::class)->create(['user_id' => $me]);
         $otherUser = factory(User::class)->create();

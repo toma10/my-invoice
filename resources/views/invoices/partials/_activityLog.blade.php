@@ -18,6 +18,9 @@
                 @case(\App\InvoiceActivityTypes::APPROVED)
                   <strong>{{ $activity->causer->name }}</strong> approved invoice {{ $invoice->variable_symbol }}.
                   @break
+                @case(\App\InvoiceActivityTypes::PAID)
+                  <strong>{{ $activity->causer->name }}</strong> marked invoice {{ $invoice->variable_symbol }} as paid.
+                  @break
                 @case(\App\InvoiceActivityTypes::DENIED)
                   <strong>{{ $activity->causer->name }}</strong> denied invoice {{ $invoice->variable_symbol }}.
                   @break

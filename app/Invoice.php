@@ -23,11 +23,6 @@ class Invoice extends Model
         'due_date',
     ];
 
-    public function isClosed(): bool
-    {
-        return $this->isApproved() || $this->isDenied();
-    }
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

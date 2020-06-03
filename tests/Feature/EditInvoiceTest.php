@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Department;
 use App\Invoice;
+use App\Status;
 use App\User;
 use Generator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -153,13 +154,15 @@ class EditInvoiceTest extends TestCase
     }
 
     /** @test */
-    public function user_cannot_update_invoice_when_invoice_is_approved_or_denied()
+    public function user_cannot_update_invoice_when_invoice_is_approved_paid_or_denied()
     {
         $user = factory(User::class)->create();
         $approvedInvoice = factory(Invoice::class)->create(['user_id' => $user]);
-        $approvedInvoice->approve();
+        $approvedInvoice->update(['status_id' => Status::fromName(Status::APPROVED)->id]);
+        $paidInvoice = factory(Invoice::class)->create(['user_id' => $user]);
+        $paidInvoice->update(['status_id' => Status::fromName(Status::PAID)->id]);
         $deniedInvoice = factory(Invoice::class)->create(['user_id' => $user]);
-        $deniedInvoice->deny();
+        $deniedInvoice->update(['status_id' => Status::fromName(Status::DENIED)->id]);
 
         $this
             ->actingAs($user)
@@ -169,6 +172,16 @@ class EditInvoiceTest extends TestCase
         $this
             ->actingAs($user)
             ->put("invoices/{$approvedInvoice->id}", $this->getValidParams())
+            ->assertForbidden();
+
+        $this
+            ->actingAs($user)
+            ->get("invoices/{$paidInvoice->id}/edit")
+            ->assertForbidden();
+
+        $this
+            ->actingAs($user)
+            ->put("invoices/{$paidInvoice->id}", $this->getValidParams())
             ->assertForbidden();
 
         $this

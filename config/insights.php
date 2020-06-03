@@ -12,6 +12,7 @@ use ObjectCalisthenics\Sniffs\Classes\ForbiddenPublicPropertySniff;
 use ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UselessOverridingMethodSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
+use SlevomatCodingStandard\Sniffs\Classes\SuperfluousExceptionNamingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff;
 use SlevomatCodingStandard\Sniffs\Commenting\UselessFunctionDocCommentSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
@@ -88,6 +89,7 @@ return [
         ParameterTypeHintSniff::class,
         PropertyTypeHintSniff::class,
         ReturnTypeHintSniff::class,
+        SuperfluousExceptionNamingSniff::class,
         UselessFunctionDocCommentSniff::class,
     ],
 
@@ -109,6 +111,7 @@ return [
         ],
         UnusedParameterSniff::class => [
             'exclude' => [
+                'app/InvalidStatusTransitionException.php',
                 'app/Console/Kernel.php',
                 'app/Casts/CurrencyCast.php',
                 'app/Rules/CurrencyRule.php',

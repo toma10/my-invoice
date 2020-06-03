@@ -7,6 +7,7 @@ return [
         'updated' => 'Invoice was succesfully updated.',
         'deleted' => 'Invoice was succesfully deleted.',
         'approved' => 'Invoice was succesfully approved.',
+        'paid' => 'Invoice was succesfully paid.',
         'denied' => 'Invoice was succesfully denied.',
     ],
 

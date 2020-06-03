@@ -37,7 +37,7 @@
           </x-form>
         </td>
         <x-table.td aligt-right>
-          @if (! $invoice->isClosed())
+          @if ($invoice->hasStatus(\App\Status::CREATED))
             <x-link href="{{ route('invoices.edit', $invoice) }}">Edit</x-link>
             <x-delete-modal
               :action="route('invoices.destroy', $invoice)"

@@ -7,18 +7,18 @@ use App\InvoiceActivityTypes;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class DenyInvoiceController
+class PayInvoiceController
 {
     public function __invoke(Request $request): RedirectResponse
     {
         /** @var Invoice $invoice */
         $invoice = Invoice::findOrFail($request->invoice_id);
 
-        $invoice->deny();
+        $invoice->pay();
 
-        $invoice->logActivity(InvoiceActivityTypes::DENIED, $request->user());
+        $invoice->logActivity(InvoiceActivityTypes::PAID, $request->user());
 
-        flash()->success(trans('messages.invoice.denied'));
+        flash()->success(trans('messages.invoice.paid'));
 
         return back();
     }

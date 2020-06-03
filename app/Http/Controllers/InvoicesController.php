@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\InvoiceRequest;
 use App\Invoice;
 use App\InvoiceActivityTypes;
+use App\Status;
 use App\ViewModels\InvoiceViewModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -62,7 +63,7 @@ class InvoicesController
 
     public function edit(Invoice $invoice): View
     {
-        abort_if($invoice->isClosed(), Response::HTTP_FORBIDDEN);
+        abort_unless($invoice->hasStatus(Status::CREATED), Response::HTTP_FORBIDDEN);
 
         $viewModel = new InvoiceViewModel($invoice);
 
@@ -71,7 +72,7 @@ class InvoicesController
 
     public function update(InvoiceRequest $request, Invoice $invoice): RedirectResponse
     {
-        abort_if($invoice->isClosed(), Response::HTTP_FORBIDDEN);
+        abort_unless($invoice->hasStatus(Status::CREATED), Response::HTTP_FORBIDDEN);
 
         $data = $request->validated();
 
@@ -96,7 +97,7 @@ class InvoicesController
 
     public function destroy(Invoice $invoice): RedirectResponse
     {
-        abort_if($invoice->isClosed(), Response::HTTP_FORBIDDEN);
+        abort_unless($invoice->hasStatus(Status::CREATED), Response::HTTP_FORBIDDEN);
 
         Storage::delete($invoice->pdf_file_path);
         $invoice->delete();

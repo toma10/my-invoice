@@ -6,12 +6,13 @@ use App\Status;
 use Generator;
 use Tests\TestCase;
 
-class InvoiceStatusTest extends TestCase
+class StatusTest extends TestCase
 {
     public function statusNamesProvider(): Generator
     {
         yield [Status::CREATED];
         yield [Status::APPROVED];
+        yield [Status::PAID];
         yield [Status::DENIED];
     }
 
