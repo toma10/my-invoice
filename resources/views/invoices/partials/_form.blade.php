@@ -156,17 +156,6 @@
 <x-form-panel-divider />
 
 <x-form-panel
-  title="Invoice items"
-  subtitle="What are you invoicing for?"
->
-  <div class="grip-span-6">
-    <p class="text-gray-300">Not Yet</p>
-  </div>
-</x-form-panel>
-
-<x-form-panel-divider />
-
-<x-form-panel
   title="Additional information"
   subtitle="Only you will see this."
 >
