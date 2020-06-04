@@ -13,7 +13,7 @@ class ResetPasswordNotification extends Notification
         $this->url = $url;
     }
 
-    public function toMail(): MailMessage
+    public function toMail($notifiable): MailMessage
     {
         return (new MailMessage())
             ->subject('Reset Password')

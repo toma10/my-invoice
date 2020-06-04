@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\NotificationsSetting;
 use App\User;
 use Generator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,7 +23,18 @@ class EditProfileTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->actingAs($user)->get('profile/edit')->assertOk();
+        $response = $this->actingAs($user)->get('profile/edit');
+
+        $response
+            ->assertOk()
+            ->assertViewHas(
+                'user',
+                fn (User $givenUser) => $givenUser->is($user)
+            )
+            ->assertViewHas(
+                'notificationsSetting',
+                fn (NotificationsSetting $notificationsSetting) => $notificationsSetting->user_id === $user->id
+            );
     }
 
     /** @test */

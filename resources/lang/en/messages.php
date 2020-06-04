@@ -26,6 +26,10 @@ return [
         'activated' => 'Account has been activated.',
     ],
 
+    'notificationsSetting' => [
+        'updated' => 'Notifications setting was succesfully updated.',
+    ],
+
     'users' => [
         'invited' => 'User was invited.',
         'activated' => 'User was activated.',

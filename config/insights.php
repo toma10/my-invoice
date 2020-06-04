@@ -104,6 +104,7 @@ return [
         ForbiddenPublicPropertySniff::class => [
             'exclude' => [
                 'app/Events',
+                'app/NotificationsSetting.php',
             ],
         ],
         FunctionLengthSniff::class => [
@@ -115,6 +116,8 @@ return [
                 'app/Console/Kernel.php',
                 'app/Casts/CurrencyCast.php',
                 'app/Rules/CurrencyRule.php',
+                'app/Notifications',
+                'app/Http/Controllers/UpdateNotificationSettings.php',
             ],
         ],
         UnusedPrivateElementsSniff::class => [

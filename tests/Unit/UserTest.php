@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Events\UserActivated;
 use App\Events\UserDeactivated;
 use App\Invoice;
+use App\NotificationsSetting;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
@@ -125,7 +126,7 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function user_can_determine_if_owner_of_the_invoice()
+    public function user_can_determine_if_is_owner_of_the_invoice()
     {
         $user = factory(User::class)->create();
         $otherUser = factory(User::class)->create();
@@ -134,5 +135,35 @@ class UserTest extends TestCase
 
         $this->assertFalse($user->isOwnerOf($invoiceA));
         $this->assertTrue($user->isOwnerOf($invoiceB));
+    }
+
+    /** @test */
+    public function it_has_notification_settings()
+    {
+        $user = factory(User::class)->create();
+        $notificationsSetting = factory(NotificationsSetting::class)->create(['user_id' => $user]);
+
+        $this->assertEquals($user->id, $user->notificationsSetting->user_id);
+    }
+
+    /** @test */
+    public function it_returns_notifications_settings_for_given_user()
+    {
+        $user = factory(User::class)->create();
+        $notificationsSetting = factory(NotificationsSetting::class)->create(['user_id' => $user]);
+
+        $foundNotificationsSetting = NotificationsSetting::forUser($user);
+
+        $this->assertEquals($user->id, $user->notificationsSetting->user_id);
+    }
+
+    /** @test */
+    public function it_created_notifications_settings_for_given_user_if_it_doesnt_exist()
+    {
+        $user = factory(User::class)->create();
+
+        $foundNotificationsSetting = NotificationsSetting::forUser($user);
+
+        $this->assertEquals($user->id, $user->notificationsSetting->user_id);
     }
 }

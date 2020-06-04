@@ -90,7 +90,7 @@
 
   <x-form-panel-divider />
 
-  <x-form action="#">
+  <x-form :action="route('updateNotificationsSetting')">
     <x-form-panel
       title="Notifications"
       subtitle="Decide which communications you'd like to receive."
@@ -102,22 +102,51 @@
             <div>
               <div class="flex items-start">
                 <div class="absolute flex items-center h-5">
-                  <input id="invoice_approved" name="invoice_approved" type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
+                  <input
+                    id="invoice_approved"
+                    name="invoice_approved"
+                    type="checkbox"
+                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                    {{ $notificationsSetting->invoice_approved ? 'checked' : '' }}
+                  />
                 </div>
                 <div class="pl-7 text-sm leading-5">
                   <label for="invoice_approved" class="font-medium text-gray-700">Invoice approved</label>
-                  <p class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
+                  <p class="text-gray-500">Get notified when invoice is approved.</p>
                 </div>
               </div>
             </div>
             <div>
               <div class="flex items-start">
                 <div class="absolute flex items-center h-5">
-                  <input id="invoice_denied" name="invoice_denied" type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
+                  <input
+                    id="invoice_paid"
+                    name="invoice_paid"
+                    type="checkbox"
+                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                    {{ $notificationsSetting->invoice_paid ? 'checked' : '' }}
+                  />
+                </div>
+                <div class="pl-7 text-sm leading-5">
+                  <label for="invoice_paid" class="font-medium text-gray-700">Invoice paid</label>
+                  <p class="text-gray-500">Get notified when invoice is paid.</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-start">
+                <div class="absolute flex items-center h-5">
+                  <input
+                    id="invoice_denied"
+                    name="invoice_denied"
+                    type="checkbox"
+                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                    {{ $notificationsSetting->invoice_denied ? 'checked' : '' }}
+                  />
                 </div>
                 <div class="pl-7 text-sm leading-5">
                   <label for="invoice_denied" class="font-medium text-gray-700">Invoice denied</label>
-                  <p class="text-gray-500">Get notified when a candidate applies for a job.</p>
+                  <p class="text-gray-500">Get notified when invoice is denied.</p>
                 </div>
               </div>
             </div>

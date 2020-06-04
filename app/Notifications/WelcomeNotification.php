@@ -6,9 +6,6 @@ use Illuminate\Notifications\Messages\MailMessage;
 
 class WelcomeNotification extends Notification
 {
-    /**
-     * @param  mixed $notifiable
-     */
     public function toMail($notifiable): MailMessage
     {
         return (new MailMessage())

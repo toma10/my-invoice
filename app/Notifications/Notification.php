@@ -3,13 +3,22 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification as BaseNotification;
 
-class Notification extends BaseNotification
+abstract class Notification extends BaseNotification
 {
     use Queueable;
 
-    public function via(): array
+    /**
+     * @param  mixed  $notifiable
+     */
+    abstract public function toMail($notifiable): MailMessage;
+
+    /**
+     * @param  mixed  $notifiable
+     */
+    public function via($notifiable): array
     {
         return ['mail'];
     }

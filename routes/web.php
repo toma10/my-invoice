@@ -20,6 +20,7 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SetupAccountController;
 use App\Http\Controllers\ShowInvoiceController;
 use App\Http\Controllers\ShowUserController;
+use App\Http\Controllers\UpdateNotificationSettings;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,8 @@ Route::middleware('auth')->group(function () {
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::post('password', ChangePasswordController::class)->name('password.change');
+
+    Route::post('notifications-settings', UpdateNotificationSettings::class)->name('updateNotificationsSetting');
 
     Route::resource('invoices', InvoicesController::class);
     Route::post('invoices/{invoice}/download', DownloadInvoiceController::class)->name('invoices.download');

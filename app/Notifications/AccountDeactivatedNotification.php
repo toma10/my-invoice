@@ -6,7 +6,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 
 class AccountDeactivatedNotification extends Notification
 {
-    public function toMail(): MailMessage
+    public function toMail($notifiable): MailMessage
     {
         return (new MailMessage())
             ->subject('Account deactivated')
