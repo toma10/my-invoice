@@ -7,6 +7,8 @@ use App\Http\Controllers\DeactivateUserController;
 use App\Http\Controllers\DenyInvoiceController;
 use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\DownloadInvoiceController;
+use App\Http\Controllers\ExportInvoicesController;
+use App\Http\Controllers\ExportUserInvoicesController;
 use App\Http\Controllers\InviteUserController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\ListInvoicesController;
@@ -55,6 +57,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('invoices', InvoicesController::class);
     Route::post('invoices/{invoice}/download', DownloadInvoiceController::class)->name('invoices.download');
+    Route::post('export-invoices', ExportUserInvoicesController::class)->name('exportInvoices');
 });
 
 Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
@@ -76,4 +79,5 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::post('approved-invoices', ApproveInvoiceController::class)->name('approveInvoice');
     Route::post('paid-invoices', PayInvoiceController::class)->name('payInvoice');
     Route::post('denied-invoices', DenyInvoiceController::class)->name('denyInvoice');
+    Route::post('export-invoices', ExportInvoicesController::class)->name('exportInvoices');
 });
