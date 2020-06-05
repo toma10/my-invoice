@@ -15,7 +15,7 @@ class CreateNotificationsSettingsTable extends Migration
     {
         Schema::create('notifications_settings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->unique();
             $table->boolean('invoice_approved')->default(true);
             $table->boolean('invoice_paid')->default(true);
             $table->boolean('invoice_denied')->default(true);
