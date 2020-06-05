@@ -4,12 +4,8 @@
   :action="$action"
   :title="$title"
   :body="$body"
+  type="warning"
 >
-  <x-slot name="icon">
-    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-      <x-heroicon-o-exclamation class="h-6 w-6 text-red-600" />
-    </div>
-  </x-slot>
   <x-slot name="buttons">
     <span class="flex w-full rounded-md shadow-sm sm:w-auto">
       <button

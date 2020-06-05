@@ -1,4 +1,4 @@
-@props(['title', 'body'])
+@props(['title', 'body', 'type' => 'success'])
 
 <div
   class="inline-block"
@@ -49,7 +49,13 @@
       >
         <div class="sm:flex sm:items-start">
           <div class="flex-shrink-0">
-            {{ $icon }}
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-{{ $type === 'warning' ? 'red' : 'green' }}-100 sm:mx-0 sm:h-10 sm:w-10">
+              @if ($type === 'warning')
+                <x-heroicon-o-exclamation class="h-6 w-6 text-red-600" />
+              @else
+                <x-heroicon-o-check class="h-6 w-6 text-green-600" />
+              @endif
+            </div>
           </div>
           <div class="mt-3 text-center sm:flex-1 sm:mt-0 sm:ml-4 sm:text-left">
             <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
