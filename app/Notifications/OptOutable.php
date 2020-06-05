@@ -30,7 +30,7 @@ trait OptOutable
 
         $notificationsSetting = NotificationsSetting::forUser($notifiable);
 
-        return ! $notificationsSetting[$this->settingsKeyName()];
+        return ! ($notificationsSetting[$this->settingsKeyName()] ?? true);
     }
 
     abstract protected function settingsKeyName();
