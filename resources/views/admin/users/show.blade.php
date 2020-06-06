@@ -6,6 +6,17 @@
     <x-page-title>{{ $user->name }}</x-page-title>
     <x-user-state :user="$user" size="md" />
   </div>
+  @if ($user->isAdmin())
+    <x-form :action="route('admin.demoteUser')" method="DELETE">
+      <x-hidden-field name="user_id" :value="$user->id" />
+      <x-button variant="plain">Demote to User</x-button>
+    </x-form>
+  @else
+    <x-form :action="route('admin.promoteUser')">
+      <x-hidden-field name="user_id" :value="$user->id" />
+      <x-button variant="plain">Promote to Admin</x-button>
+    </x-form>
+  @endif
 </x-page-header>
 <div class="mt-12">
   @include('profile.partials._info')

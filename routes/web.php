@@ -4,6 +4,7 @@ use App\Http\Controllers\ActivateUserController;
 use App\Http\Controllers\ApproveInvoiceController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\DeactivateUserController;
+use App\Http\Controllers\DemoteUserController;
 use App\Http\Controllers\DenyInvoiceController;
 use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\DownloadInvoiceController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PayInvoiceController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PromoteUserController;
 use App\Http\Controllers\RequestResetPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SetupAccountController;
@@ -71,6 +73,9 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 
     Route::post('activated-users', ActivateUserController::class)->name('activateUser');
     Route::post('deactivated-users', DeactivateUserController::class)->name('deactivateUser');
+
+    Route::post('administrators', PromoteUserController::class)->name('promoteUser');
+    Route::delete('administrators', DemoteUserController::class)->name('demoteUser');
 
     Route::resource('departments', DepartmentsController::class)->except(['show', 'destroy']);
 

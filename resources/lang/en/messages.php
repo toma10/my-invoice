@@ -34,6 +34,8 @@ return [
         'invited' => 'User was invited.',
         'activated' => 'User was activated.',
         'deactivated' => 'User was deactivated.',
+        'promoted' => 'User was promoted to admin.',
+        'demoted' => 'Admin was demoted to user.',
         'not_active' => 'Your account was deactivated.',
     ],
 
